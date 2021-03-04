@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="classes\math\Math.cpp">
+      <Filter>Classes\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="classes\math\Matrix.cpp">
+      <Filter>Classes\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="classes\math\Vector2.cpp">
+      <Filter>Classes\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="classes\math\Vector3.cpp">
+      <Filter>Classes\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\drawing.cpp">
+      <Filter>Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\globals.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\utils.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui_demo.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui_draw.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui_impl_dx11.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui_impl_win32.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing\imgui\imgui_widgets.cpp">
+      <Filter>Drawing\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="authgg.cpp">
+      <Filter>Auth\auth.gg</Filter>
+    </ClCompile>
+    <ClCompile Include="crypto.cpp">
+      <Filter>Auth\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="lw_http.cpp">
+      <Filter>Auth\http</Filter>
+    </ClCompile>
+    <ClCompile Include="hwid.cpp">
+      <Filter>Auth\hwid</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.cpp">
+      <Filter>Auth\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="md5wrapper.cpp">
+      <Filter>Auth\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="print.cpp">
+      <Filter>Auth\print</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include.hpp" />
+    <ClInclude Include="classes\math\Math.hpp">
+      <Filter>Classes\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\math\Matrix.hpp">
+      <Filter>Classes\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\math\Vector2.hpp">
+      <Filter>Classes\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\math\Vector3.hpp">
+      <Filter>Classes\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\drawing.hpp">
+      <Filter>Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\globals.hpp">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\utils.hpp">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\MenuBackground.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\MenuControls.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\MenuFonts.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imconfig.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imgui.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imgui_impl_dx11.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imgui_impl_win32.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imgui_internal.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imstb_rectpack.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imstb_textedit.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\imstb_truetype.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing\imgui\stb_image.h">
+      <Filter>Drawing\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="authgg.h">
+      <Filter>Auth\auth.gg</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto.h">
+      <Filter>Auth\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="lw_http.hpp">
+      <Filter>Auth\http</Filter>
+    </ClInclude>
+    <ClInclude Include="hwid.h">
+      <Filter>Auth\hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Auth\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="md5wrapper.h">
+      <Filter>Auth\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="xor.h">
+      <Filter>Auth\xor</Filter>
+    </ClInclude>
+    <ClInclude Include="print.h">
+      <Filter>Auth\print</Filter>
+    </ClInclude>
+    <ClInclude Include="Plague.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{e234a13b-9985-450c-91b1-b52fed292a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Math">
+      <UniqueIdentifier>{f968e539-4756-48b0-9cec-b2928db235a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Drawing">
+      <UniqueIdentifier>{fe7b3348-a7ea-4fac-ab4b-655a155bbd66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Globals">
+      <UniqueIdentifier>{38b2322e-a922-4b9b-8508-36c7846d4cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{2583d9a4-cfe1-4a88-9635-2f3aa5a4046a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Drawing\ImGui">
+      <UniqueIdentifier>{c8bc028f-4c36-41f3-876f-2e5ad32475a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth">
+      <UniqueIdentifier>{09329f67-590f-40cb-8392-6920c24d67e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\auth.gg">
+      <UniqueIdentifier>{69a854c1-a020-4339-8f45-5130622b6428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\crypto">
+      <UniqueIdentifier>{34be3c1e-3ada-41ac-aed6-adf30dfabbc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\http">
+      <UniqueIdentifier>{5323c35e-0565-4e44-a197-d16eba8a6798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\hwid">
+      <UniqueIdentifier>{315740b1-b431-4959-a2a3-c5a50adc6e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\md5">
+      <UniqueIdentifier>{aea54ffd-9254-4489-884f-1040107680ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\xor">
+      <UniqueIdentifier>{a202f101-bbc3-4afa-8d1a-16a806b2b7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Auth\print">
+      <UniqueIdentifier>{62a2e1a1-2f26-4744-bc36-165a7e29bd74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
