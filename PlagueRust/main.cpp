@@ -26,8 +26,12 @@ bool test = true;
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <iostream>     //for using cout
+#include <stdlib.h>     //for using the function sleep
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h>
+#include <conio.h>
 #include <fstream>|
 #include <iostream>
 std::string username;
@@ -78,8 +82,6 @@ int main()
    //     password = takenstring;
    //     std::cout << username, password;
    //     authgg::Login(username, password);
-
-
      std::cout << R"( /$$$$$$$  /$$                                                                                    
 | $$__  $$| $$                                                                                    
 | $$  \ $$| $$  /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$  /$$  /$$  /$$  /$$$$$$   /$$$$$$   /$$$$$$ 
@@ -92,27 +94,67 @@ int main()
                         |  $$$$$$/                                                                
                          \______/       
                                                           )" << std::endl;
+     system("Color 1");
+     Sleep(175);
+     system("Color 2");
+     Sleep(175);
+     system("Color 3");
+     Sleep(175);
+     system("Color 4");
+     Sleep(175);
+     system("Color 6");
+     Sleep(175);
+     system("Color 7");
+     Sleep(175);
+     system("Color 8");
+     Sleep(175);
+     system("Color 9");
+
+     system("Color 5");
         while (x == false) {
-            std::cout << "\n" << std::endl;
-            std::cout << "Plagueware Auth \n" << std::endl;
-            std::cout << "Login [1] or Info [2]" << std::endl;
-       
-            std::cin >> choice;
-            if (choice == "1") {
+            std::cout << "\n";
+            std::string hello = "Welcome to Plagueware!\n\n";
+            for (int i = 0; hello[i] != '\0'; i++) {
+                if (hello[i] == ' ')
+                    Sleep(50 + rand() % 150);
+                else
+                    Sleep(30 + rand() % 100);
+                std::cout << hello[i];
+            }
+           
+            print::set_text("\nStatus: ", LightBlue);
+            print::set_text("   [Undetected] \n\n", Green);
+            Sleep(300);
+            std::string choice = "LETMEGETAHOYA";
+            if (choice == "LETMEGETAHOYA") {
                 x = true;
-                std::cout << "Enter Username: ";
+                print::set_text("\Enter Username: ", LightBlue);
                 std::cin >> username;
-                std::cout << "Enter Password: ";
+                Sleep(300);
+                print::set_text("\Enter Password: ", LightBlue);
+                Sleep(300);
                 std::cin >> password;
                 std::cout << " " << std::endl;
+                std::string hello = "Loading.....";
+                for (int i = 0; hello[i] != '\0'; i++) {
+                    if (hello[i] == ' ')
+                        Sleep(150 + rand() % 150);
+                    else
+                        Sleep(150 + rand() % 100);
+                    std::cout << hello[i];
+                }
+                Sleep(500);
+                 print::set_text("   [Done] \n\n", Green);
                 authgg::Login(username, password);
+                Sleep(300);
+
             }
-            else if (choice == "2") {
-                std::cout << "sign in with your forum account";
+            else if (choice == "23746290834234234") {
+                std::cout << "Something went wrong";
             }
             else {
-                std::cout << "Wrong Login" << std::endl;
-                exit(0);
+                system("cls");
+             
             }
         }
         std::string config;

@@ -278,31 +278,36 @@ void authgg::Login(const std::string username, const std::string password)
 	uservariable = outputArr[6].c_str();
 	if (login == "success" + crypto.apikey + crypto.aid + ip)
 	{
-		print::set_text("Checking Info... \n", Blue);
-		MessageBoxA(NULL, "Logged In!", "Success!", MB_OK | MB_ICONEXCLAMATION);
-		print::set_text("Checking For Update... \n", Blue);
-		print::set_text("Preparing Software... \n", Blue);
-		print::set_text("Beaming NN's... \n", Blue);
-		print::set_text("Finished :) \n", Blue);
+		system("cls");
+		std::cout << R"( /$$$$$$$  /$$                                                                                    
+| $$__  $$| $$                                                                                    
+| $$  \ $$| $$  /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$  /$$  /$$  /$$  /$$$$$$   /$$$$$$   /$$$$$$ 
+| $$$$$$$/| $$ |____  $$ /$$__  $$| $$  | $$ /$$__  $$| $$ | $$ | $$ |____  $$ /$$__  $$ /$$__  $$
+| $$____/ | $$  /$$$$$$$| $$  \ $$| $$  | $$| $$$$$$$$| $$ | $$ | $$  /$$$$$$$| $$  \__/| $$$$$$$$
+| $$      | $$ /$$__  $$| $$  | $$| $$  | $$| $$_____/| $$ | $$ | $$ /$$__  $$| $$      | $$_____/
+| $$      | $$|  $$$$$$$|  $$$$$$$|  $$$$$$/|  $$$$$$$|  $$$$$/$$$$/|  $$$$$$$| $$      |  $$$$$$$
+|__/      |__/ \_______/ \____  $$ \______/  \_______/ \_____/\___/  \_______/|__/       \_______/
+                         /$$  \ $$                                                                
+                        |  $$$$$$/                                                                
+                         \______/       
+                                                          )" << std::endl;
+		print::set_text("Login sucessful \n", Blue);
+		std::string hello = "Preparing Software...!";
+		for (int i = 0; hello[i] != '\0'; i++) {
+			if (hello[i] == ' ')
+				Sleep(50 + rand() % 150);
+			else
+				Sleep(30 + rand() % 100);
+			std::cout << hello[i];
+		}
+		print::set_text("   [Done] \n", Green);
+
+		Sleep(100);
 		PlaySound(TEXT("Voice.wav"), NULL, SND_FILENAME | SND_ASYNC);
-		print::set_text("-User Info- \n", Blue);
-		print::set_text("HWID: ", LightBlue);
-		print::set_text(hwid.c_str(), LightBlue);
-		print::set_text("\n", LightBlue);
-		print::set_text("Email: ", LightBlue);
-		print::set_text(email2.c_str(), LightBlue);
-		print::set_text("\n", LightBlue);
-		print::set_text("\n", LightBlue);
-		print::set_text("IP: ", LightBlue);
-		print::set_text(ip.c_str(), LightBlue);
-		print::set_text("\n", LightBlue);
-		print::set_text("Expiry: ", LightBlue);
+		print::set_text("\nExpiry: ", LightBlue);
 		print::set_text(expiry.c_str(), LightBlue);
 		print::set_text("\n", LightBlue);
-		print::set_text("User Variable: ", LightBlue);
-		print::set_text(uservariable.c_str(), LightBlue);
-		print::set_text("\n", LightBlue);
-		print::set_text("Press Return to Continue", LightBlue);
+		print::set_text("\nPress Return to Continue\n", Magenta);
 		std::cin.ignore();
 		xyz = true;
 	}
