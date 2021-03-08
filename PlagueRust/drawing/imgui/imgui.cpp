@@ -2117,7 +2117,11 @@ void ImGuiTextFilter::Build()
             CountGrep += 1;
     }
 }
-
+ImGuiStyle& ImGui::GetStyle()
+{
+    IM_ASSERT(GImGui != NULL && "No current context. Did you call ui::CreateContext() or ui::SetCurrentContext()?");
+    return GImGui->Style;
+}
 bool ImGuiTextFilter::PassFilter(const char* text, const char* text_end) const
 {
     if (Filters.empty())
@@ -3081,11 +3085,6 @@ ImGuiIO & ImGui::GetIO()
     return GImGui->IO;
 }
 
-ImGuiStyle& ImGui::GetStyle()
-{
-    IM_ASSERT(GImGui != NULL && "No current context. Did you call ImGui::CreateContext() and ImGui::SetCurrentContext() ?");
-    return GImGui->Style;
-}
 
 // Same value as passed to the old io.RenderDrawListsFn function. Valid after Render() and until the next call to NewFrame()
 ImDrawData* ImGui::GetDrawData()

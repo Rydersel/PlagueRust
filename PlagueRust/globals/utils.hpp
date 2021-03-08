@@ -16,7 +16,11 @@ public:
         struct watermark {
             bool enabled = true;
             float color[4] = { 1, 1, 1, 1 };
-        } watermark;
+        } watermark;    
+        struct CustomizeMenu {
+            bool enabled;
+            float color[4] = { 1, 1, 1, 1 };
+        } CustomizeMenu;
 
         struct players {
             struct name {

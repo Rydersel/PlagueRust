@@ -1,0 +1,26 @@
+[Bindings]
+ akbind = 113
+lrbind = 114
+mp5bind = 115
+smgbind = 116
+thompsonbind = 117
+semibind = 119
+m249bind = 118
+pythonbind = 120
+revolverbind = 121
+p250bind = 122
+holobind = 97
+simplebind = 98
+8xbind = 99
+muzzlebind = 101
+silencebind = 102
+furnacebind = 89
+lfurnacebind = 88
+upgradebind = 70
+codelockbind = 66
+sens = 1.000000
+rando = 0
+xrando = 100
+yrando = 100
+cross = 1
+ammocount = 1

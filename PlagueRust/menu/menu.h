@@ -8,6 +8,7 @@ class Menu {
 
 public:
 	void Watermark();
+	void Customize();
 	void Render();
 	void Shutdown();
 	void ColorPicker(const char* name, float* color, bool alpha);
