@@ -130,11 +130,11 @@ bool Drawing::Initialize()
                 fade -= 0.01f;
         }
 
-        if (GetAsyncKeyState(VK_INSERT)) {
+        if (GetAsyncKeyState(settings->keybinds.MenuKey)) {
             isClicked = false;
             isDown = true;
         }
-        else if (!GetAsyncKeyState(VK_INSERT) && isDown) {
+        else if (!GetAsyncKeyState(settings->keybinds.MenuKey) && isDown) {
             isClicked = true;
             isDown = false;
         }

@@ -102,6 +102,7 @@ public:
         int lfurnaceKeybind = 88;
         int upgradeKeybind = 70;
         int codelockkeybind = 66;
+        int MenuKey = 45;
         bool close = false;
     } keybinds;
     struct globalvars {
@@ -109,7 +110,7 @@ public:
         bool isCrouched = false;
         bool isReload;
         int weaponAmmo;
-        bool isNightMode = true;
+        bool isNightMode = false;
     } globalvars;
 };
 

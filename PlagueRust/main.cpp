@@ -71,18 +71,21 @@ int main()
     SetConsoleTitle("Plague Rust");
     //////////////////////////////////////////////////////////////////////////////////////
 
-  //  FILE* file;
- //   if (file = fopen("Login.inv", "r")) {
+   // FILE* file;
+  //  if (file = fopen("Login.inv", "r")) {
    //     std::cout << "Auto Log-In Authorizing. . . \n";
-  //      fclose(file);
+   //    
   //      char takenstring[100];
-   //    GetPrivateProfileString(TEXT("Bindings"), TEXT("username"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
- //       username = takenstring;
-  //      GetPrivateProfileString(TEXT("Bindings"), TEXT("password"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
+  //      GetPrivateProfileString(TEXT("Bindings"), TEXT("username"), TEXT("fail while e"), takenstring, 100, TEXT(".\Login.inv"));
+  //      username = takenstring;
+   //     GetPrivateProfileString(TEXT("Bindings"), TEXT("password"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\Login.inv"));
    //     password = takenstring;
-   //     std::cout << username, password;
+   //     std::cout << password;
    //     authgg::Login(username, password);
-     std::cout << R"( /$$$$$$$  /$$                                                                                    
+
+  //  }
+    
+    std::cout << R"( /$$$$$$$  /$$                                                                                 
 | $$__  $$| $$                                                                                    
 | $$  \ $$| $$  /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$  /$$  /$$  /$$  /$$$$$$   /$$$$$$   /$$$$$$ 
 | $$$$$$$/| $$ |____  $$ /$$__  $$| $$  | $$ /$$__  $$| $$ | $$ | $$ |____  $$ /$$__  $$ /$$__  $$
@@ -138,14 +141,14 @@ int main()
                 std::string hello = "Loading.....";
                 for (int i = 0; hello[i] != '\0'; i++) {
                     if (hello[i] == ' ')
-                        Sleep(150 + rand() % 150);
+                        Sleep(175 + rand() % 150);
                     else
-                        Sleep(150 + rand() % 100);
+                        Sleep(175 + rand() % 100);
                     std::cout << hello[i];
                 }
-                Sleep(500);
+                Sleep(2000);
                  print::set_text("   [Done] \n\n", Green);
-               // authgg::Login(username, password);
+                 authgg::Login(username, password);
                 Sleep(300);
 
             }

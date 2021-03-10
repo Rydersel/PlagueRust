@@ -41,6 +41,8 @@ extern bool unload;
 int isCountingAmmo = 1;
 void loadConfig() {
 	char takenstring[100];
+	GetPrivateProfileString(TEXT("Bindings"), TEXT("MenuKey"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
+	settings->keybinds.MenuKey = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("akbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
 	settings->keybinds.akKeybind = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("lrbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -93,7 +95,7 @@ void loadConfig() {
 	isCountingAmmo = atoi(takenstring);
 }
 void saveConfig() {
-	config = "[Bindings]\n akbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
+	config = "[Bindings]\n MenuKey = " + std::to_string(settings->keybinds.MenuKey) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
 		+ std::to_string(settings->keybinds.revolverKeybind) + "\np250bind = " + std::to_string(settings->keybinds.p250Keybind) + "\nholobind = " + std::to_string(settings->keybinds.holoKeybind) + "\nsimplebind = " + std::to_string(settings->keybinds.simpleKeybind) + "\n8xbind = " + std::to_string(settings->keybinds.x8Keybind) + "\nmuzzlebind = " + std::to_string(settings->keybinds.muzzleKeybind) + "\nsilencebind = " + std::to_string(settings->keybinds.silenceKeybind) + "\nfurnacebind = " + std::to_string(settings->keybinds.furnaceKeybind) + "\nlfurnacebind = "
 		+ std::to_string(settings->keybinds.lfurnaceKeybind) + "\nupgradebind = " + std::to_string(settings->keybinds.upgradeKeybind) + "\ncodelockbind = " + std::to_string(settings->keybinds.codelockkeybind) + "\nsens = " + std::to_string(uSens) + "\nrando = " + std::to_string(oRandom) + "\nxrando = " + std::to_string(xControlP) + "\nyrando = " + std::to_string(yControlP) + "\ncross = " + std::to_string(settings->visuals.crosshair.crossnum) + "\nammocount = " +std::to_string(isCountingAmmo);
 	std::ofstream file_;
@@ -1453,7 +1455,7 @@ void Menu::Watermark()
 
 	}
 	if (settings->visuals.watermark.enabled) {
-		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true);
+		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true, 15);
 		ImGui::Spacing();
 		ImGui::PushFont(menuFont);
 		ImGui::Text(" ");
@@ -1533,17 +1535,19 @@ void Menu::WatermarkSolid()
 
 
 		style->ItemSpacing = ImVec2(25.f, 4.5f), ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoNav  | ImGuiWindowFlags_NoTitleBar| ImGuiWindowFlags_NoScrollWithMouse;
+		
 		{
 			ImGui::PushFont(menuFont);
-				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
-					ImGui::Text("Gun:    ");
+				
+				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {	
+					ImGui::Text("Gun:     ");
 					ImGui::SameLine();
 					ImGui::Text(items[selectedItem]);
 					ImGui::EndChild();
 				}
 				ImGui::Spacing();
 				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
-					ImGui::Text("Scope:  ");
+					ImGui::Text("Scope:   ");
 							   
 							   
 					ImGui::SameLine();
@@ -1552,7 +1556,7 @@ void Menu::WatermarkSolid()
 				}
 				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
 				
-					ImGui::Text("Barrel: ");
+					ImGui::Text("Barrel:  ");
 					ImGui::SameLine();
 					ImGui::Text(barrel[selectedBarrel]);
 					if (settings->globalvars.weaponAmmo < 0) {
@@ -1675,7 +1679,6 @@ void Menu::Render() {
 					break;
 				}
 
-				style->Colors[ImGuiCol_Border] = ImColor(10, 10, 10, 255);
 
 			} ImGui::EndChild();
 
@@ -1689,7 +1692,7 @@ void Menu::Render() {
 			else
 			{ 
 				style->Colors[ImGuiCol_Border] = ImColor(125, 45, 204, 125);
-				style->WindowBorderSize = 1.0f;
+				style->WindowBorderSize = 2.0f;
 			}
 		} ImGui::EndChild();
 
@@ -1732,7 +1735,8 @@ void Menu::Config() {
 
 	InsertGroupBoxLeft("Guns", 286.f); {
 		style->WindowPadding = ImVec2(8, 8);
-		ImGui::Text("AK47 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.akKeybind, NULL);;
+		ImGui::Text("Menu Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.MenuKey, NULL);;
+		ImGui::Text("AK47 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  @@", &settings->keybinds.akKeybind, NULL);;
 		ImGui::Text("LR3000 Keybind: "); ImGui::SameLine(); ImGui::Keybind(" ", &settings->keybinds.lrKeybind, NULL);;
 		ImGui::Text("MP5 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  ", &settings->keybinds.mp5Keybind, NULL);;
 		ImGui::Text("Custom SMG Keybind: "); ImGui::SameLine(); ImGui::Keybind("   ", &settings->keybinds.smgKeybind, NULL);;
@@ -1779,8 +1783,8 @@ void Menu::Keybinds() {
 		InsertCheckbox("Overlay", settings->visuals.watermark.enabled); style->ItemSpacing = ImVec2(8, 2);
 		ImGui::Combo("  ", &WMenuPos, wpos, IM_ARRAYSIZE(wpos)); style->ItemSpacing = ImVec2(8, 2);
 		{
-			if (wpos[WMenuPos] == "Top -left") {
-				corner = -1;
+			if (wpos[WMenuPos] == "Top-left") {
+				corner = 0;
 			}
 			if (wpos[WMenuPos] == "Top-right") {
 				corner = 1;
