@@ -8,6 +8,7 @@ class Menu {
 
 public:
 	void Watermark();
+	void WatermarkSolid();
 	void Customize();
 	void Render();
 	void Shutdown();

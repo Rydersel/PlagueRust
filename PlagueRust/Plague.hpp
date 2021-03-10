@@ -19,7 +19,10 @@ std::string userWeapon = "NONE", userScope = "NONE", userBarrel = "NONE", userSo
 static const char* items[]{ "AK47", "LR-300", "MP5", "SMG", "Thompson", "Semi", "M249", "Python", "Revolver", "P250", "None" };
 static int selectedItem = 10;
 static const char* scopes[]{ "Holo", "Simple", "8x", "None" };
+static const char* wpos[]{ "Top-left", "Top-right", "Bottom-left", "Bottom-right" };
+
 static int selectedScope = 3;
+static int WMenuPos = 4;
 static const char* barrel[]{ "Boost", "Suppresor", "None" };
 static int selectedBarrel = 2;
 double uSens = 0;

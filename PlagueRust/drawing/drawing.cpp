@@ -112,7 +112,8 @@ bool Drawing::Initialize()
         ImGui::NewFrame();
 
         menu->Watermark();
-
+        if (settings->visuals.Watermarksolid.enabled)
+            menu->WatermarkSolid();
 
         if (menu->isOpen )
         {
@@ -121,6 +122,8 @@ bool Drawing::Initialize()
 
 
             menu->Render();
+            if (settings->visuals.CustomizeMenu.enabled)
+                menu->Customize();
         }
         else {
             if (fade > 0.f)

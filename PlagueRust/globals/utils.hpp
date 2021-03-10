@@ -16,10 +16,17 @@ public:
         struct watermark {
             bool enabled = true;
             float color[4] = { 1, 1, 1, 1 };
+
         } watermark;    
-        struct CustomizeMenu {
+
+        struct Watermarksolid {
             bool enabled;
             float color[4] = { 1, 1, 1, 1 };
+        } Watermarksolid;
+
+        struct CustomizeMenu {
+            bool enabled;
+            bool rainbowmode;
         } CustomizeMenu;
 
         struct players {
@@ -116,7 +123,7 @@ public:
 
 
     float* color_cycle();
-
+    float* color_cycle2();
     float color_hue[3] = { 255, 0, 0 };
     int color_iteration = 0;
 

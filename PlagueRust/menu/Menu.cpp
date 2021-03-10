@@ -25,17 +25,20 @@ std::string config;
 extern ImFont* menuFont{};
 extern ImFont* keybindsFont{};
 extern ImFont* tabFont{};
+int corner;
 extern ImFont* tabFont2;
 extern ImFont* tabFont3;
 extern ImFont* controlFont{};
+
 extern ID3D11Texture1D* menuBg{};
 int xControlP = 100;
 int yControlP = 100;
 static int tab = 0;
 
+
+
 extern bool unload;
 int isCountingAmmo = 1;
-
 void loadConfig() {
 	char takenstring[100];
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("akbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -1364,12 +1367,70 @@ static void HelpMarker(const char* desc)
 }
 static bool isDown = true;
 
+void Menu::Customize()
+	
+{
+	ImGuiStyle* style = &ImGui::GetStyle();
+	static ImVec4 textcolor = ImColor(213, 213, 213, 255);
+	static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+	static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
+	static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
+	static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
+	if (settings->visuals.CustomizeMenu.enabled) {
+
+		ImGui::PushFont(menuFont);
+
+		ImGui::SetNextWindowSize(ImVec2(200.f, 330.f));
+		ImGui::Begin("Customize", &isOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse); {
+			{
+				InsertCheckbox("Rainbow Mode", settings->visuals.CustomizeMenu.rainbowmode); style->ItemSpacing = ImVec2(8, 2);
+				ImGui::ColorEdit3("Text Color##2", (float*)&textcolor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_Text] = textcolor; style->WindowPadding = ImVec2(8, 2);
+				ImGui::ColorEdit3("Button Color##2", (float*)&buttoncolor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_Button] = buttoncolor; style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = buttoncolor; style->WindowPadding = ImVec2(8, 2);
+				ImGui::ColorEdit3("Window##2", (float*)&WindowColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = WindowColor; style->WindowPadding = ImVec2(8, 2);
+				ImGui::ColorEdit3("Tab Text##2", (float*)&TabTextColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_TabText] = TabTextColor, style->WindowPadding = ImVec2(8, 2);
+
+
+				if (ImGui::Button("Close")) {
+					settings->visuals.CustomizeMenu.enabled = false;
+
+				}
+				if (ImGui::Button("Reset")) {
+					settings->visuals.CustomizeMenu.enabled = false;
+					ImGui::GetStyle().Colors[ImGuiCol_Text] = ImColor(213, 213, 213, 255); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImColor(40, 40, 40, 255); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_TabText] = ImColor(100, 100, 100, 255); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_FrameBgActive] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
+					static ImVec4 textcolor = ImColor(213, 213, 213, 255);
+					static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+					static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
+					static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
+					static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
+				}
+
+
+
+			}
+			ImGui::End();
+		}
+	}
+
+}
+
 void Menu::Watermark()
 {
 	ImGui::SetNextWindowSize(ImVec2(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)));
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
+
 	ImGui::Begin("main", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_None | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing);
 	{
+		
 		ImGuiStyle* style = &ImGui::GetStyle();
 		if (settings->visuals.crosshair.crossnum == 1) {
 			drawing->crosshair(ImVec4(1.f, 1.f, 1.f, 1.f), 1.f, settings->visuals.crosshair.size, settings->visuals.crosshair.x_offset, settings->visuals.crosshair.y_offset);
@@ -1381,7 +1442,7 @@ void Menu::Watermark()
 			drawing->crosshair3(ImVec4(1.f, 1.f, 1.f, 1.f), 1.f, settings->visuals.crosshair.size, settings->visuals.crosshair.x_offset, settings->visuals.crosshair.y_offset);
 		}
 		else if (settings->visuals.crosshair.crossnum == 4) {
-			drawing->crosshair4(ImVec4(1.f, 1.f, 1.f, 1.f), 1.f, settings->visuals.crosshair.size, settings->visuals.crosshair.x_offset, settings->visuals.crosshair.y_offset);
+			drawing->crosshair4(ImVec4(1.f,1.f,1.f,1.f), 1.f, settings->visuals.crosshair.size, settings->visuals.crosshair.x_offset, settings->visuals.crosshair.y_offset);
 		}
 
 		static ImVec4 textcolor = ImColor(213, 213, 213, 255);
@@ -1389,83 +1450,39 @@ void Menu::Watermark()
 		static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
 		static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
 		static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
-		static ImVec4 Slider = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
-		if (settings->visuals.CustomizeMenu.enabled) {
-		
-			ImGui::PushFont(menuFont);
 
-			ImGui::SetNextWindowSize(ImVec2(200.f, 330.f));
-			ImGui::Begin("Customize", &isOpen,  ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse); {
-				{
-
-					ImGui::ColorEdit3("Text Color##2", (float*)&textcolor, ImGuiColorEditFlags_NoInputs); style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_Text] = textcolor; style->WindowPadding = ImVec2(8, 2);
-					ImGui::ColorEdit3("Button Color##2", (float*)&buttoncolor, ImGuiColorEditFlags_NoInputs); style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_Button] = buttoncolor; style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = buttoncolor; style->WindowPadding = ImVec2(8, 2);
-					ImGui::ColorEdit3("Window##2", (float*)&WindowColor, ImGuiColorEditFlags_NoInputs); style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = WindowColor; style->WindowPadding = ImVec2(8, 2);
-					ImGui::ColorEdit3("Tab Text##2", (float*)&TabTextColor, ImGuiColorEditFlags_NoInputs); style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_TabText] = TabTextColor, style->WindowPadding = ImVec2(8, 2);
-
-
-					ImGui::ColorEdit3("Slider##2", (float*)&Slider, ImGuiColorEditFlags_NoInputs); style->WindowPadding = ImVec2(8, 2);
-					ImGui::GetStyle().Colors[ImGuiCol_SliderGrab] = Slider, style->WindowPadding = ImVec2(8, 2);
-
-				
-
-					
-					
-					if (ImGui::Button("Close")) {
-						settings->visuals.CustomizeMenu.enabled = false;
-
-					 }
-					if (ImGui::Button("Reset")) {
-						settings->visuals.CustomizeMenu.enabled = false;
-						ImGui::GetStyle().Colors[ImGuiCol_Text] = ImColor(213, 213, 213, 255); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImColor(40, 40, 40, 255); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_TabText] = ImColor(100, 100, 100, 255); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_FrameBgActive] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
-						ImGui::GetStyle().Colors[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f); style->WindowPadding = ImVec2(8, 2);
-					
-					}
-
-
-					
-				}
-				ImGui::End();
-			}
-
+	}
+	if (settings->visuals.watermark.enabled) {
+		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true);
+		ImGui::Spacing();
+		ImGui::PushFont(menuFont);
+		ImGui::Text(" ");
+		ImGui::Text(items[selectedItem]);
+		ImGui::Text(scopes[selectedScope]);
+		ImGui::Text(barrel[selectedBarrel]);
+		if (settings->globalvars.weaponAmmo < 0) {
+			settings->globalvars.weaponAmmo = 0;
 		}
-		if (settings->visuals.watermark.enabled) {
-			drawing->text({ 5, 0 }, "Plague Rust | V5.0.2", drawing->ToImVec(utils->color_cycle()), true);
-			ImGui::Spacing();
-			ImGui::PushFont(menuFont);
-			ImGui::Text(" ");
-			ImGui::Text(items[selectedItem]);
-			ImGui::Text(scopes[selectedScope]);
-			ImGui::Text(barrel[selectedBarrel]);
-			if (settings->globalvars.weaponAmmo < 0) {
-				settings->globalvars.weaponAmmo = 0;
-			}
-			std::string s = std::to_string(settings->globalvars.weaponAmmo);
-			char const* pchar = s.c_str();  
-			if (isCountingAmmo && !settings->features.xM249 && !settings->features.xSemi && !settings->features.xPython && !settings->features.xRevolver && !settings->features.xP250) {
-				ImGui::Text("Ammo Count: "); ImGui::SameLine(); ImGui::Text(pchar);
-			}
-
-			if (settings->globalvars.isCrouched) {
-				ImGui::Text("Crouched");
-			}
-			if (settings->globalvars.isReload)
-				ImGui::Text("Reloading");
-			ImGui::PopFont();
-			
+		std::string s = std::to_string(settings->globalvars.weaponAmmo);
+		char const* pchar = s.c_str();
+		if (isCountingAmmo && !settings->features.xM249 && !settings->features.xSemi && !settings->features.xPython && !settings->features.xRevolver && !settings->features.xP250) {
+			ImGui::Text("Ammo Count: "); ImGui::SameLine(); ImGui::Text(pchar);
 		}
-	} ImGui::End();
+
+		if (settings->globalvars.isCrouched) {
+			ImGui::Text("Crouched");
+		}
+		if (settings->globalvars.isReload)
+			ImGui::Text("Reloading");
+		ImGui::PopFont();
+
+	}
+
+
 }
+	
+	
+
 void myFlags() {
 	for (;;) {
 		while (GetAsyncKeyState(VK_CONTROL) != 0) {
@@ -1495,20 +1512,80 @@ void mymenu::autoDetection() {
 	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Keybinds, 0, 0, 0);
 	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)myFlags, 0, 0, 0);
 }
-void Menu::Render() {
+
+void Menu::WatermarkSolid()
+{
+	ImGuiIO& io = ImGui::GetIO();
 	if (settings->keybinds.close == true)
 		exit(0);
 	ImGuiStyle* style = &ImGui::GetStyle();
+	ImGui::PushFont(tabFont);
+	const float DISTANCE = 10.0f;
+
+	if (corner != -1)
+	{
+		ImVec2 window_pos = ImVec2((corner & 1) ? io.DisplaySize.x - DISTANCE : DISTANCE, (corner & 2) ? io.DisplaySize.y - DISTANCE : DISTANCE);
+		ImVec2 window_pos_pivot = ImVec2((corner & 1) ? 1.0f : 0.0f, (corner & 2) ? 1.0f : 0.0f);
+		
+		
+		
+		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
 
 
+		style->ItemSpacing = ImVec2(25.f, 4.5f), ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoNav  | ImGuiWindowFlags_NoTitleBar| ImGuiWindowFlags_NoScrollWithMouse;
+		{
+			ImGui::PushFont(menuFont);
+				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
+					ImGui::Text("Gun:    ");
+					ImGui::SameLine();
+					ImGui::Text(items[selectedItem]);
+					ImGui::EndChild();
+				}
+				ImGui::Spacing();
+				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
+					ImGui::Text("Scope:  ");
+							   
+							   
+					ImGui::SameLine();
+					ImGui::Text(scopes[selectedScope]);
+					ImGui::EndChild();
+				}
+				ImGui::BeginChild("WatermarkContents", ImVec2(150.f, 50.f), false); {
+				
+					ImGui::Text("Barrel: ");
+					ImGui::SameLine();
+					ImGui::Text(barrel[selectedBarrel]);
+					if (settings->globalvars.weaponAmmo < 0) {
+						settings->globalvars.weaponAmmo = 0;
+					}
+					ImGui::EndChild();
+				}
 
-	style->WindowPadding = ImVec2(6, 6);
+				std::string s = std::to_string(settings->globalvars.weaponAmmo);
+				char const* pchar = s.c_str();
+			}
+		}
+		ImGui::End();
+	}
+
+void Menu::Render() {
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (settings->keybinds.close == true)
+		exit(0);
+
+
+	
+	ImGuiStyle* style = &ImGui::GetStyle();
+
+
 
 	ImGui::PushFont(menuFont);
 
 	ImGui::SetNextWindowSize(ImVec2(400.f, 330.f));
 	ImGui::Begin("PlagueWare Contents", &isOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar); {
-		
+
 
 		ImVec2 p = ImGui::GetCursorScreenPos();
 		ImGui::SameLine(6.f);
@@ -1560,7 +1637,6 @@ void Menu::Render() {
 					break;
 				case 3:
 					ImGui::TabSpacer("##Top Spacer", ImVec2(75.f, 10.f));
-
 					if (ImGui::Tab("Guns", ImVec2(75.f, 75.f))) tab = 0;
 					if (ImGui::Tab("Config", ImVec2(75.f, 75.f))) tab = 1;
 					if (ImGui::Tab("Keybind", ImVec2(75.f, 75.f))) tab = 2;
@@ -1580,7 +1656,7 @@ void Menu::Render() {
 			ImGui::SameLine(75.f);
 
 			ImGui::BeginChild("Tab Contents", ImVec2(300.f, 322.f), false); {
-
+				//inner border
 				style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0);
 
 				switch (tab) {
@@ -1604,14 +1680,24 @@ void Menu::Render() {
 			} ImGui::EndChild();
 
 			style->ItemSpacing = ImVec2(4.f, 4.f);
-			style->Colors[ImGuiCol_ChildBg] = ImColor(17, 17, 17, 255);
-
+			//outer border
+			if (settings->visuals.CustomizeMenu.rainbowmode)
+			{
+				style->Colors[ImGuiCol_Border] = drawing->ToImVec(utils->color_cycle2());
+				style->WindowBorderSize = 5.0f;
+			}
+			else
+			{ 
+				style->Colors[ImGuiCol_Border] = ImColor(125, 45, 204, 125);
+				style->WindowBorderSize = 1.0f;
+			}
 		} ImGui::EndChild();
 
 		ImGui::PopFont();
 
 	} ImGui::End();
 }
+
 
 void Menu::Shutdown() {
 
@@ -1672,8 +1758,11 @@ void Menu::Config() {
 }
 
 
-
 void Menu::Keybinds() {
+
+
+
+
 
 	ImGuiStyle* style = &ImGui::GetStyle();
 	InsertSpacer("Top Spacer");
@@ -1685,12 +1774,25 @@ void Menu::Keybinds() {
 		ImGui::Text("Randomization:"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("Overall Random", oRandom, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("X Control %", xControlP, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
-		InsertIntSlider("Y Control %", yControlP, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("Crosshair Type", settings->visuals.crosshair.crossnum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
-		ImGui::SliderInt("Crosshair Type", &settings->visuals.crosshair.crossnum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
-
 		InsertCheckbox("Sound", settings->features.uSound); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Overlay", settings->visuals.watermark.enabled); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::Combo("  ", &WMenuPos, wpos, IM_ARRAYSIZE(wpos)); style->ItemSpacing = ImVec2(8, 2);
+		{
+			if (wpos[WMenuPos] == "Top -left") {
+				corner = -1;
+			}
+			if (wpos[WMenuPos] == "Top-right") {
+				corner = 1;
+			}
+			if (wpos[WMenuPos] == "Bottom-left") {
+				corner = 2;
+			}
+			if (wpos[WMenuPos] == "Bottom-right") {
+				corner = 3;
+			}
+		}
+		
 		if (ImGui::Button("Save Config")) {
 		
 			saveConfig();
@@ -1700,7 +1802,9 @@ void Menu::Keybinds() {
 		}
 	
 		InsertCheckbox("Toggle Menu", settings->visuals.CustomizeMenu.enabled); style->ItemSpacing = ImVec2(8, 2);
-
+		InsertCheckbox("Toggle Solid Overlay", settings->visuals.Watermarksolid.enabled); style->ItemSpacing = ImVec2(8, 2);
+		if (settings->visuals.Watermarksolid.enabled)
+			settings->visuals.watermark.enabled = false;
 		style->ItemSpacing = ImVec2(0, 0);
 		style->WindowPadding = ImVec2(6, 6);
 
