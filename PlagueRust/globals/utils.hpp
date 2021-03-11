@@ -125,6 +125,7 @@ public:
 
     float* color_cycle();
     float* color_cycle2();
+    float* color_cycle3();
     float color_hue[3] = { 255, 0, 0 };
     int color_iteration = 0;
 

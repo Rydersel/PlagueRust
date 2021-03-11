@@ -58,6 +58,7 @@ int main()
     ///////////////////////////////////////////////////////////////////////////////////////
     //                              Application Settings
     crypto.aid = "295521";
+   // crypto.secret = "xxM8F1ooY3ApPBfpJEZtFRJBHLF5QP5Ok2n";
     crypto.secret = "mb6bgDAU5dL2alSMjjsEWRcxFEi39y8gEq9";
     crypto.apikey = "94474811782731843521956429331157219";
     crypto.version = "5.0";
@@ -133,10 +134,10 @@ int main()
                 x = true;
                 print::set_text("\Enter Username: ", LightBlue);
                 std::cin >> username;
-                Sleep(300);
                 print::set_text("\Enter Password: ", LightBlue);
-                Sleep(300);
+                Sleep(1000);
                 std::cin >> password;
+                Sleep(300);
                 std::cout << " " << std::endl;
                 std::string hello = "Loading.....";
                 for (int i = 0; hello[i] != '\0'; i++) {
@@ -147,8 +148,8 @@ int main()
                     std::cout << hello[i];
                 }
                 Sleep(2000);
-                 print::set_text("   [Done] \n\n", Green);
-                 authgg::Login(username, password);
+                authgg::Login(username, password);
+                print::set_text("   [Done] \n\n", Green);
                 Sleep(300);
 
             }

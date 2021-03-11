@@ -38,7 +38,7 @@ static int tab = 0;
 
 
 extern bool unload;
-int isCountingAmmo = 1;
+bool isCountingAmmo = true;
 void loadConfig() {
 	char takenstring[100];
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("MenuKey"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -739,7 +739,7 @@ double ReplacementFor_ScopeAttachment() {
 			if (settings->features.x8x == true)
 				return Multiplication::userScope.ReplacementFor_x8 + 0.75;
 		}
-		// James Charles has a Giant Cock
+
 		return Multiplication::userScope.ReplacementFor_x8;
 	}
 	else if (settings->features.xSimple == true) {
@@ -1374,10 +1374,12 @@ void Menu::Customize()
 {
 	ImGuiStyle* style = &ImGui::GetStyle();
 	static ImVec4 textcolor = ImColor(213, 213, 213, 255);
-	static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+	static ImVec4 buttoncolor = ImColor(180, 36, 209, 150);
 	static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
 	static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
+	static ImVec4 ThemeColor = ImColor(180, 36, 209, 255);
 	static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
+	
 	if (settings->visuals.CustomizeMenu.enabled) {
 
 		ImGui::PushFont(menuFont);
@@ -1385,7 +1387,8 @@ void Menu::Customize()
 		ImGui::SetNextWindowSize(ImVec2(200.f, 330.f));
 		ImGui::Begin("Customize", &isOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse); {
 			{
-				InsertCheckbox("Rainbow Mode", settings->visuals.CustomizeMenu.rainbowmode); style->ItemSpacing = ImVec2(8, 2);
+				
+				InsertCheckbox("Rainbow Mode", settings->visuals.CustomizeMenu.rainbowmode); 
 				ImGui::ColorEdit3("Text Color##2", (float*)&textcolor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
 				ImGui::GetStyle().Colors[ImGuiCol_Text] = textcolor; style->WindowPadding = ImVec2(8, 2);
 				ImGui::ColorEdit3("Button Color##2", (float*)&buttoncolor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
@@ -1395,7 +1398,12 @@ void Menu::Customize()
 				ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = WindowColor; style->WindowPadding = ImVec2(8, 2);
 				ImGui::ColorEdit3("Tab Text##2", (float*)&TabTextColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
 				ImGui::GetStyle().Colors[ImGuiCol_TabText] = TabTextColor, style->WindowPadding = ImVec2(8, 2);
-
+				ImGui::ColorEdit3("Slider + Check##2", (float*)&ThemeColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar); style->WindowPadding = ImVec2(8, 2);
+				ImGui::GetStyle().Colors[ImGuiCol_MenuTheme] = ThemeColor, style->WindowPadding = ImVec2(8, 2);
+				if (settings->visuals.CustomizeMenu.rainbowmode)
+				{
+					ImGui::GetStyle().Colors[ImGuiCol_MenuTheme] = drawing->ToImVec(utils->color_cycle3());
+				}
 
 				if (ImGui::Button("Close")) {
 					settings->visuals.CustomizeMenu.enabled = false;
@@ -1409,11 +1417,14 @@ void Menu::Customize()
 					ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
 					ImGui::GetStyle().Colors[ImGuiCol_TabText] = ImColor(100, 100, 100, 255); style->WindowPadding = ImVec2(8, 2);
 					ImGui::GetStyle().Colors[ImGuiCol_FrameBgActive] = ImColor(32, 32, 38, 255); style->WindowPadding = ImVec2(8, 2);
+					ImGui::GetStyle().Colors[ImGuiCol_MenuTheme] = ImColor(174, 50, 199, 255); style->WindowPadding = ImVec2(8, 2);
+
 					static ImVec4 textcolor = ImColor(213, 213, 213, 255);
 					static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
 					static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
 					static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
 					static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
+					settings->visuals.crosshair.size = 5;
 				}
 
 
@@ -1447,15 +1458,16 @@ void Menu::Watermark()
 			drawing->crosshair4(ImVec4(1.f,1.f,1.f,1.f), 1.f, settings->visuals.crosshair.size, settings->visuals.crosshair.x_offset, settings->visuals.crosshair.y_offset);
 		}
 
-		static ImVec4 textcolor = ImColor(213, 213, 213, 255);
-		static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-		static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
-		static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
-		static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
+		//static ImVec4 textcolor = ImColor(213, 213, 213, 255);
+	//	static ImVec4 buttoncolor = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+	//	static ImVec4 WindowColor = ImColor(40, 40, 40, 255);
+	//	static ImVec4 TabTextColor = ImColor(100, 100, 100, 255);
+	//	static ImVec4 FrameBg = ImColor(32, 32, 38, 255);
 
 	}
 	if (settings->visuals.watermark.enabled) {
-		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true, 15);
+		ImGui::Spacing();
+		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true, 20);
 		ImGui::Spacing();
 		ImGui::PushFont(menuFont);
 		ImGui::Text(" ");
@@ -1588,6 +1600,7 @@ void Menu::Render() {
 	ImGui::PushFont(menuFont);
 
 	ImGui::SetNextWindowSize(ImVec2(400.f, 330.f));
+
 	ImGui::Begin("PlagueWare Contents", &isOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar); {
 
 
@@ -1687,12 +1700,12 @@ void Menu::Render() {
 			if (settings->visuals.CustomizeMenu.rainbowmode)
 			{
 				style->Colors[ImGuiCol_Border] = drawing->ToImVec(utils->color_cycle2());
-				style->WindowBorderSize = 5.0f;
+				style->WindowBorderSize = 4.0f;
 			}
 			else
 			{ 
-				style->Colors[ImGuiCol_Border] = ImColor(125, 45, 204, 125);
-				style->WindowBorderSize = 2.0f;
+				style->Colors[ImGuiCol_Border] = ImColor(180, 36, 208, 150);
+				style->WindowBorderSize = 1.5f;
 			}
 		} ImGui::EndChild();
 
@@ -1781,22 +1794,9 @@ void Menu::Keybinds() {
 		InsertIntSlider("Crosshair Type", settings->visuals.crosshair.crossnum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Sound", settings->features.uSound); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Overlay", settings->visuals.watermark.enabled); style->ItemSpacing = ImVec2(8, 2);
-		ImGui::Combo("  ", &WMenuPos, wpos, IM_ARRAYSIZE(wpos)); style->ItemSpacing = ImVec2(8, 2);
-		{
-			if (wpos[WMenuPos] == "Top-left") {
-				corner = 0;
-			}
-			if (wpos[WMenuPos] == "Top-right") {
-				corner = 1;
-			}
-			if (wpos[WMenuPos] == "Bottom-left") {
-				corner = 2;
-			}
-			if (wpos[WMenuPos] == "Bottom-right") {
-				corner = 3;
-			}
-		}
-		
+		InsertCheckbox("Customize Menu", settings->visuals.CustomizeMenu.enabled); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::SameLine(); HelpMarker("Show Customization Menu");
+	
 		if (ImGui::Button("Save Config")) {
 		
 			saveConfig();
@@ -1805,8 +1805,26 @@ void Menu::Keybinds() {
 			loadConfig();
 		}
 	
-		InsertCheckbox("Toggle Menu", settings->visuals.CustomizeMenu.enabled); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Toggle Solid Overlay", settings->visuals.Watermarksolid.enabled); style->ItemSpacing = ImVec2(8, 2);
+		if (settings->visuals.Watermarksolid.enabled)
+		{
+			ImGui::Combo(" ", &WMenuPos, wpos, IM_ARRAYSIZE(wpos)); style->ItemSpacing = ImVec2(8, 2);
+			{
+				if (wpos[WMenuPos] == "Top-left") {
+					corner = 0;
+				}
+				if (wpos[WMenuPos] == "Top-right") {
+					corner = 1;
+				}
+				if (wpos[WMenuPos] == "Bottom-left") {
+					corner = 2;
+				}
+				if (wpos[WMenuPos] == "Bottom-right") {
+					corner = 3;
+				}
+			}
+			ImGui::SameLine(); HelpMarker("Change location of solid overlay");
+		}
 		if (settings->visuals.Watermarksolid.enabled)
 			settings->visuals.watermark.enabled = false;
 		style->ItemSpacing = ImVec2(0, 0);
@@ -1833,7 +1851,8 @@ void Menu::Misc() {
 		ImGui::Text("Auto Upgrade: 0 = None, 1 = Wood,");
 		ImGui::Text(" 2 = Stone, 3 = Metal, 4 = HQM");
 		InsertIntSlider(" ", bgradeNum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
-		InsertIntSlider("Count Ammo", isCountingAmmo, 0, 1, "%d"); style->ItemSpacing = ImVec2(8, 2);
+		InsertCheckbox("Count Ammo", isCountingAmmo); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::SameLine(); HelpMarker("Actively Count the Ammo in Your Weapon");
 		if (ImGui::Button("Exit Script")) {
 			exit(0);
 		}

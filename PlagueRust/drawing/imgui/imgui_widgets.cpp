@@ -3464,6 +3464,7 @@ bool ImGui::SliderScalar(const char* label, ImGuiDataType data_type, void* v, co
     auto bottomColor = ImColor(68, 68, 68, 255);
     auto topColorHovered = ImColor(62, 62, 62, 255);
     auto bottomColorHovered = ImColor(78, 78, 78, 255);
+//main color
     auto grabTopColor = GetColorU32(ImGuiCol_MenuTheme);
     auto grabBottomColor = GetColorU32(ImGuiCol_MenuTheme) - ImColor(0, 0, 0, 125);
 
