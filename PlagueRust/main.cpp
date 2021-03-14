@@ -1,4 +1,41 @@
-﻿
+﻿///////////// NIKO IS A LAZY FUCK ? /////////////
+#pragma message("(()) Can you say l a z y ?")
+/////////////=====================/////////////
+
+#define EVERYTHING_IS_ON_FIRE true
+
+#ifdef EVERYTHING_IS_ON_FIRE
+#pragma message("[[]] Dear god, grab the fire extinguisher!")
+#pragma message("[[]] So... You actually watch your compiler...")
+#pragma message("[[]] You're pretty damn cool!")
+#endif // EVERYTHING_IS_ON_FIRE
+
+/*
+
+▓██   ██▓ ▒█████   █    ██    ▄▄▄█████▓ ██░ ██  ▒█████   █    ██   ▄████  ██░ ██ ▄▄▄█████▓   ▓██   ██▓ ▒█████   █    ██     ▄████▄   ▒█████   █    ██  ██▓    ▓█████▄
+ ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓  ██▒ ▓▒▓██░ ██▒▒██▒  ██▒ ██  ▓██▒ ██▒ ▀█▒▓██░ ██▒▓  ██▒ ▓▒    ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██▀ ▀█  ▒██▒  ██▒ ██  ▓██▒▓██▒    ▒██▀ ██▌
+  ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒ ▓██░ ▒░▒██▀▀██░▒██░  ██▒▓██  ▒██░▒██░▄▄▄░▒██▀▀██░▒ ▓██░ ▒░     ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒▓█    ▄ ▒██░  ██▒▓██  ▒██░▒██░    ░██   █▌
+  ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░ ▓██▓ ░ ░▓█ ░██ ▒██   ██░▓▓█  ░██░░▓█  ██▓░▓█ ░██ ░ ▓██▓ ░      ░ ▐██▓░▒██   ██░▓▓█  ░██░   ▒▓▓▄ ▄██▒▒██   ██░▓▓█  ░██░▒██░    ░▓█▄   ▌
+  ░ ██▒▓░░ ████▓▒░▒▒█████▓      ▒██▒ ░ ░▓█▒░██▓░ ████▓▒░▒▒█████▓ ░▒▓███▀▒░▓█▒░██▓  ▒██▒ ░      ░ ██▒▓░░ ████▓▒░▒▒█████▓    ▒ ▓███▀ ░░ ████▓▒░▒▒█████▓ ░██████▒░▒████▓
+   ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒      ▒ ░░    ▒ ░░▒░▒░ ▒░▒░▒░ ░▒▓▒ ▒ ▒  ░▒   ▒  ▒ ░░▒░▒  ▒ ░░         ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ░▒ ▒  ░░ ▒░▒░▒░ ░▒▓▒ ▒ ▒ ░ ▒░▓  ░ ▒▒▓  ▒
+ ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░        ░     ▒ ░▒░ ░  ░ ▒ ▒░ ░░▒░ ░ ░   ░   ░  ▒ ░▒░ ░    ░        ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░      ░  ▒     ░ ▒ ▒░ ░░▒░ ░ ░ ░ ░ ▒  ░ ░ ▒  ▒
+ ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░       ░  ░░ ░░ ░ ░ ▒   ░░░ ░ ░ ░ ░   ░  ░  ░░ ░  ░          ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░    ░        ░ ░ ░ ▒   ░░░ ░ ░   ░ ░    ░ ░  ░
+ ░ ░         ░ ░     ░                  ░  ░  ░    ░ ░     ░           ░  ░  ░  ░             ░ ░         ░ ░     ░        ░ ░          ░ ░     ░         ░  ░   ░
+ ░ ░                                                                                          ░ ░                          ░                                   ░
+
+  ▄████▄   ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀   ▄▄▄█████▓ ██░ ██  ██▓  ██████    ▓██   ██▓ ▒█████   █    ██      ██████  ██ ▄█▀ ██▓▓█████▄
+▒██▀ ▀█  ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒    ▓  ██▒ ▓▒▓██░ ██▒▓██▒▒██    ▒     ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██    ▒  ██▄█▒ ▓██▒▒██▀ ██▌
+▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░    ▒ ▓██░ ▒░▒██▀▀██░▒██▒░ ▓██▄        ▒██ ██░▒██░  ██▒▓██  ▒██░   ░ ▓██▄   ▓███▄░ ▒██▒░██   █▌
+▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄    ░ ▓██▓ ░ ░▓█ ░██ ░██░  ▒   ██▒     ░ ▐██▓░▒██   ██░▓▓█  ░██░     ▒   ██▒▓██ █▄ ░██░░▓█▄   ▌
+▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄     ▒██▒ ░ ░▓█▒░██▓░██░▒██████▒▒     ░ ██▒▓░░ ████▓▒░▒▒█████▓    ▒██████▒▒▒██▒ █▄░██░░▒████▓
+░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒     ▒ ░░    ▒ ░░▒░▒░▓  ▒ ▒▓▒ ▒ ░      ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ▒ ▒▓▒ ▒ ░▒ ▒▒ ▓▒░▓   ▒▒▓  ▒
+  ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░       ░     ▒ ░▒░ ░ ▒ ░░ ░▒  ░ ░    ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░    ░ ░▒  ░ ░░ ░▒ ▒░ ▒ ░ ░ ▒  ▒
+░          ░░   ░   ░   ▒   ░        ░ ░░ ░      ░       ░  ░░ ░ ▒ ░░  ░  ░      ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░    ░  ░  ░  ░ ░░ ░  ▒ ░ ░ ░  ░
+░ ░         ░           ░  ░░ ░      ░  ░                ░  ░  ░ ░        ░      ░ ░         ░ ░     ░              ░  ░  ░    ░     ░
+░                           ░                                                    ░ ░                                               ░
+
+*/
+
 
 #include "include.hpp"
 #include "globals/globals.hpp"
@@ -10,6 +47,7 @@ bool test = true;
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <regex>
 #include <cstdlib>
 #include <stdlib.h>
 #include "menu/menu.h"
@@ -22,6 +60,8 @@ bool test = true;
 #include "md5wrapper.h"
 #include "crypto.h"
 #include "authgg.h"
+#include <Windows.h>
+#include <chrono>
 #include <string>
 #include <fstream>
 #include <iomanip>
@@ -30,15 +70,25 @@ bool test = true;
 #include <stdlib.h>     //for using the function sleep
 #include <stdio.h>
 #include <tchar.h>
+#include <time.h>
 #include <windows.h>
 #include <conio.h>
 #include <fstream>|
 #include <iostream>
+
 std::string username;
 std::string password;
 std::string email;
 std::string key;
 std::string choice;
+std::string autouser;
+std::string autopass;
+std::string email1;
+std::string key1;
+std::string choice1;
+
+static bool gInit, gRPC = true;
+
 bool x = false;
 /* main function */
 void HideConsole()
@@ -52,8 +102,18 @@ void autoDetection2()
         authgg::Login2(username, password);
     }
 }
+void autoDetection3()
+{
+    while (true) {
+        Sleep(10000000);
+        authgg::Login2(autouser, autopass);
+    }
+}
+
+
 int main()
 {
+
     extern c_crypto crypto;
     ///////////////////////////////////////////////////////////////////////////////////////
     //                              Application Settings
@@ -64,27 +124,13 @@ int main()
     crypto.version = "5.0";
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
-    //                                Initialization
+    //                                Initialization                                    //
     auto md5 = new md5wrapper();
     authgg::GenerateSeed();
     authgg::Initialize();
     std::string choice;
     SetConsoleTitle("Plague Rust");
-    //////////////////////////////////////////////////////////////////////////////////////
 
-   // FILE* file;
-  //  if (file = fopen("Login.inv", "r")) {
-   //     std::cout << "Auto Log-In Authorizing. . . \n";
-   //    
-  //      char takenstring[100];
-  //      GetPrivateProfileString(TEXT("Bindings"), TEXT("username"), TEXT("fail while e"), takenstring, 100, TEXT(".\Login.inv"));
-  //      username = takenstring;
-   //     GetPrivateProfileString(TEXT("Bindings"), TEXT("password"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\Login.inv"));
-   //     password = takenstring;
-   //     std::cout << password;
-   //     authgg::Login(username, password);
-
-  //  }
     
     std::cout << R"( /$$$$$$$  /$$                                                                                 
 | $$__  $$| $$                                                                                    
@@ -107,7 +153,7 @@ int main()
      system("Color 4");
      Sleep(175);
      system("Color 6");
-     Sleep(175);
+     Sleep(175);//one second
      system("Color 7");
      Sleep(175);
      system("Color 8");
@@ -131,6 +177,108 @@ int main()
             Sleep(300);
             std::string choice = "LETMEGETAHOYA";
             if (choice == "LETMEGETAHOYA") {
+
+                FILE* file;
+                if (file = fopen("C:\\user-plagueware.txt", "r")) {
+                    fclose(file);
+                    std::string hello2 = "Hold on let us do some magic...";
+                    for (int i = 0; hello2[i] != '\0'; i++) {
+                        if (hello2[i] == ' ')
+                            Sleep(125 + rand() % 75);
+                        else
+                            Sleep(90 + rand() % 50);
+                        std::cout << hello2[i];
+                    }
+
+
+                    std::regex newlines_re("(\n|\r)+");
+
+                    std::string userfile = "C:\\user-plagueware.txt";
+                    std::fstream f(userfile, std::fstream::in);
+                    getline(f, autouser, '\0');
+                    auto result = std::regex_replace(autouser, newlines_re, "");
+                    autouser = result;
+                    f.close();
+
+                    // need to do the same for the password
+                    std::string passfile = "C:\\pass-plagueware.txt";
+                     std::fstream f1(passfile, std::fstream::in);
+                     getline(f1, autopass, '\0');
+                     auto result1 = std::regex_replace(autopass, newlines_re, "");
+                     autopass = result1;
+                     f1.close();
+                     authgg::autologin(autouser, autopass);
+
+                     print::set_text("   [Done] \n\n", Green);
+                     Sleep(300);
+
+
+
+
+                     {
+                         AllocConsole();
+                         SetConsoleTitleW(L"PlagueWare - Rust Debug");
+                         freopen("CONIN$", "r", stdin);
+                         freopen("CONOUT$", "w", stdout);
+                     }
+
+                     /* Find Rust Window */
+                     drawing->h_Game = FindWindowA("UnityWndClass", "Rust");
+                     if (!drawing->h_Game)
+                     {
+                         print(4, "\n[:(] ", "Rust Not Found! Please Open Rust Before Opening The Loader \n");
+                         SleepEx(3000, false);
+                         exit(0);
+                     }
+
+                     globals->ScreenSize = { utils->getWindowSize(drawing->h_Game).first, utils->getWindowSize(drawing->h_Game).second };
+
+                     mymenu::autoDetection();
+                     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)autoDetection2, 0, 0, 0);
+
+                     Sleep(100);
+                     HideConsole();
+                     SetForegroundWindow(drawing->h_Game);
+
+                     std::thread(&Drawing::Initialize, drawing).detach();
+
+                     bool b_ov;
+                     while (1)
+                     {
+                         SleepEx(1, false);
+                         if (!IsWindow(drawing->h_Game))
+                             drawing->b_Shutdown = true;
+
+                         HWND h_Foreground = GetForegroundWindow();
+                         if (h_Foreground != drawing->h_Game && h_Foreground != drawing->h_hWnd) {
+                             if (!b_ov) {
+                                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                                 continue;
+                             }
+                             SetWindowPos(drawing->h_hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                             b_ov = false;
+                         }
+                         else {
+                             if (b_ov) {
+                                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                                 continue;
+                             }
+
+                             SetWindowPos(drawing->h_hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+
+                             if (menu->isOpen)
+                                 SetForegroundWindow(drawing->h_hWnd);
+
+                             b_ov = true;
+                         }
+
+                         std::this_thread::sleep_for(std::chrono::milliseconds(300));
+                         if (settings->keybinds.close == true) {
+                             exit(0);
+                         }
+                     }
+                }
+
                 x = true;
                 print::set_text("\Enter Username: ", LightBlue);
                 std::cin >> username;
@@ -139,7 +287,7 @@ int main()
                 std::cin >> password;
                 Sleep(300);
                 std::cout << " " << std::endl;
-                std::string hello = "Loading.....";
+                std::string hello = "Loading...";
                 for (int i = 0; hello[i] != '\0'; i++) {
                     if (hello[i] == ' ')
                         Sleep(175 + rand() % 150);
