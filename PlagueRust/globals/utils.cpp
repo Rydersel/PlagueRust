@@ -162,6 +162,55 @@ float* Utils::color_cycle3()
 
     return f_color;
 }
+float* Utils::color_cycle4()
+{
+    switch (color_iteration)
+    {
+    case 0:
+        color_hue[1]++; /* 255, ++, 0 */
+
+        if (color_hue[1] == 255)
+            color_iteration++;
+        break;
+    case 1:
+        color_hue[0]--;
+
+        if (color_hue[0] == 0)
+            color_iteration++;
+        break;
+    case 2:
+        color_hue[2]++;
+
+        if (color_hue[2] == 255)
+            color_iteration++;
+        break;
+    case 3:
+        color_hue[1]--;
+
+        if (color_hue[1] == 0)
+            color_iteration++;
+        break;
+    case 4:
+        color_hue[0]++;
+
+        if (color_hue[0] == 255)
+            color_iteration++;
+        break;
+    case 5:
+        color_hue[2]--;
+
+        if (color_hue[2] == 0)
+            color_iteration++;
+        break;
+    case 6:
+        color_iteration = 0;
+    }
+
+    float f_color[4] = { color_hue[0] / 255.f, color_hue[1] / 255.f, color_hue[2] / 255.f, 1.f };
+
+
+    return f_color;
+}
 std::string Utils::wstring_to_string(const std::wstring& wstring)
 {
 	int slength = (int)wstring.length() + 1;

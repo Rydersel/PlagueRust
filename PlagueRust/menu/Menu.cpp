@@ -29,18 +29,29 @@ int corner;
 extern ImFont* tabFont2;
 extern ImFont* tabFont3;
 extern ImFont* controlFont{};
-
 extern ID3D11Texture1D* menuBg{};
 int xControlP = 100;
 int yControlP = 100;
 static int tab = 0;
 
-
-
 extern bool unload;
 bool isCountingAmmo = true;
+//Some Basic Windows Hooks to use later
+namespace INIT
+{
+	HMODULE Dll;
+	HWND Window;
+	WNDPROC OldWindow;
+}
+
+#define NUM_PARAMS 2
+LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 void loadConfig() {
 	char takenstring[100];
+
+	GetPrivateProfileString(TEXT("Bindings"), TEXT("Pause"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
+	settings->keybinds.Pause = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("MenuKey"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
 	settings->keybinds.MenuKey = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("akbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -94,10 +105,12 @@ void loadConfig() {
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("ammocount"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
 	isCountingAmmo = atoi(takenstring);
 }
+
+
 void saveConfig() {
-	config = "[Bindings]\n MenuKey = " + std::to_string(settings->keybinds.MenuKey) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
+	config = "[Bindings]\n MenuKey = " + std::to_string(settings->keybinds.MenuKey) + "\nPause = " + std::to_string(settings->keybinds.Pause) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
 		+ std::to_string(settings->keybinds.revolverKeybind) + "\np250bind = " + std::to_string(settings->keybinds.p250Keybind) + "\nholobind = " + std::to_string(settings->keybinds.holoKeybind) + "\nsimplebind = " + std::to_string(settings->keybinds.simpleKeybind) + "\n8xbind = " + std::to_string(settings->keybinds.x8Keybind) + "\nmuzzlebind = " + std::to_string(settings->keybinds.muzzleKeybind) + "\nsilencebind = " + std::to_string(settings->keybinds.silenceKeybind) + "\nfurnacebind = " + std::to_string(settings->keybinds.furnaceKeybind) + "\nlfurnacebind = "
-		+ std::to_string(settings->keybinds.lfurnaceKeybind) + "\nupgradebind = " + std::to_string(settings->keybinds.upgradeKeybind) + "\ncodelockbind = " + std::to_string(settings->keybinds.codelockkeybind) + "\nsens = " + std::to_string(uSens) + "\nrando = " + std::to_string(oRandom) + "\nxrando = " + std::to_string(xControlP) + "\nyrando = " + std::to_string(yControlP) + "\ncross = " + std::to_string(settings->visuals.crosshair.crossnum) + "\nammocount = " +std::to_string(isCountingAmmo);
+		+ std::to_string(settings->keybinds.lfurnaceKeybind) + "\nupgradebind = " + std::to_string(settings->keybinds.upgradeKeybind) + "\ncodelockbind = " + std::to_string(settings->keybinds.codelockkeybind) + "\nsens = " + std::to_string(uSens) + "\nrando = " + std::to_string(oRandom) + "\nxrando = " + std::to_string(xControlP) + "\nyrando = " + std::to_string(yControlP) + "\ncross = " + std::to_string(settings->visuals.crosshair.crossnum) + "\nammocount = " + std::to_string(isCountingAmmo);
 	std::ofstream file_;
 	file_.open("Config.inv");
 	file_ << config;
@@ -358,6 +371,7 @@ void autoCode() {
 		settings->features.uSound = true;
 	}
 }
+
 void largeFurnace() {
 	if (islfurnace) {
 		SetCursorPos(695, 500);
@@ -918,14 +932,18 @@ bool ShootGun() {
 			if (settings->features.xM249 || settings->features.xSemi || settings->features.xPython) {
 				if (settings->globalvars.isCrouched) {
 					if (settings->features.isHipfire) {
-						for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000; i++)
+						if (!menu->isOpen )
 						{
-							xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult));
-							ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
-							
+							for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000; i++)
+							{
+								xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult));
+								ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
+
+
+							}
+							Sleep(0);
 
 						}
-						Sleep(0);
 					}
 
 					else {
@@ -939,13 +957,16 @@ bool ShootGun() {
 				}
 				else {
 					if (settings->features.isHipfire) {
-						for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000; i++)
+						if (!menu->isOpen)
 						{
-							xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult * 2), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult * 2));
-							ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
+							for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000; i++)
+							{
+								xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult * 2), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult * 2));
+								ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
 
+							}
+							Sleep(0);
 						}
-						Sleep(0);
 					}
 
 					else {
@@ -960,13 +981,16 @@ bool ShootGun() {
 			}
 			else {
 				if (settings->features.isHipfire) {
-					for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000 && ammoCount(); i++)
+					if (!menu->isOpen)
 					{
-						xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult));
-						ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
+						for (int i = 0; i <= ReplacementFor_CurrentWeapon::Velocity() && GetAsyncKeyState(VK_LBUTTON) & 0x8000 && ammoCount(); i++)
+						{
+							xRandomization((int)ReplacementFor_xMuzzleBoost((float)ReplacementFor_CurrentWeapon::Delay()), (int)ReplacementFor_xMuzzleBoost(ReplacementFor_CurrentWeapon::Control(i)), (int)(ReplacementFor_CurrentWeapon::x(i) * settings->globalvars.hipMult), (int)(ReplacementFor_CurrentWeapon::y(i) * settings->globalvars.hipMult));
+							ReplacementFor_CurrentWeapon::ReplacementFor_RecoilBreak(i);
 
+						}
+						Sleep(0);
 					}
-					Sleep(0);
 				}
 
 				else {
@@ -993,6 +1017,8 @@ void Keybinds() {
 		else {
 			settings->globalvars.isReload = false;
 		}
+
+
 		if (GetAsyncKeyState(settings->keybinds.akKeybind) != 0) {
 			settings->features.xAK = !settings->features.xAK;
 			settings->globalvars.weaponAmmo = ReplacementFor_CurrentWeapon::Velocity() + 2;
@@ -1000,7 +1026,7 @@ void Keybinds() {
 				userWeapon = "AK47";
 				settings->features.xLR = false; settings->features.xMP5 = false; settings->features.xSMG = false; settings->features.xThompson = false; settings->features.xSemi = false; settings->features.xM249 = false; settings->features.xPython = false; settings->features.xRevolver = false; settings->features.xP250 = false;
 				selectedItem = 0;
-
+				
 			}
 			else if (settings->features.xAK == false) {
 				userWeapon = "NONE"; userScope = "NONE"; userBarrel = "NONE";
@@ -1030,7 +1056,7 @@ void Keybinds() {
 		}
 		if (GetAsyncKeyState(settings->keybinds.mp5Keybind) != 0) {
 			settings->features.xMP5 = !settings->features.xMP5;
-			settings->globalvars.weaponAmmo = ReplacementFor_CurrentWeapon::Velocity() + 2;
+			settings->globalvars.weaponAmmo = ReplacementFor_CurrentWeapon::Velocity();
 			if (settings->features.xMP5 == true) {
 				userWeapon = "MP5A4";
 				settings->features.xLR = false; settings->features.xSMG = false; settings->features.xThompson = false; settings->features.xSemi = false; settings->features.xM249 = false; settings->features.xAK = false; settings->features.xPython = false; settings->features.xRevolver = false; settings->features.xP250 = false;
@@ -1207,6 +1233,7 @@ void Keybinds() {
 				}
 				ReplacementFor_Sound(settings->features.xHolo);
 			}
+
 			if (GetAsyncKeyState(settings->keybinds.silenceKeybind) != 0) {
 				settings->features.xSuppressor = !settings->features.xSuppressor;
 				if (settings->features.xSuppressor == true) {
@@ -1218,6 +1245,8 @@ void Keybinds() {
 				userBarrel = "NONE";
 				ReplacementFor_Sound(settings->features.xSuppressor);
 			}
+	
+
 			if (GetAsyncKeyState(settings->keybinds.muzzleKeybind) != 0) {
 				settings->features.xMuzzleBoost = !settings->features.xMuzzleBoost;
 				if (settings->features.xMuzzleBoost == true) {
@@ -1229,7 +1258,7 @@ void Keybinds() {
 				userBarrel = "NONE";
 				ReplacementFor_Sound(settings->features.xMuzzleBoost);
 			}
-						if (scopes[selectedScope] == "Holo") {
+			if (scopes[selectedScope] == "Holo") {
 				settings->features.xHolo = true; settings->features.x8x = false; settings->features.xSimple = false;
 			}
 			if (scopes[selectedScope] == "Simple") {
@@ -1292,8 +1321,12 @@ void Keybinds() {
 		if (GetAsyncKeyState(settings->keybinds.upgradeKeybind) & 0x8000) {
 			autoUpgrade();
 		}
-		if (GetAsyncKeyState(settings->keybinds.lfurnaceKeybind) & 0x8000)
+		if (GetAsyncKeyState((settings->keybinds.codelockkeybind) & 0x8000 & isAutoCode)) {
+			autoCode();
+		}
+		if (GetAsyncKeyState(settings->keybinds.lfurnaceKeybind) & 0x8000){
 			largeFurnace();
+		}
 		if (GetAsyncKeyState(VK_ADD) != 0) {
 			xSound = !xSound;
 			if (xSound == true) {
@@ -1440,7 +1473,6 @@ void Menu::Watermark()
 {
 	ImGui::SetNextWindowSize(ImVec2(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)));
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
-
 	ImGui::Begin("main", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_None | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing);
 	{
 		
@@ -1467,7 +1499,7 @@ void Menu::Watermark()
 	}
 	if (settings->visuals.watermark.enabled) {
 		ImGui::Spacing();
-		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true, 20);
+		drawing->text({ 5, 0 }, "Plague Rust | V5.1.0", drawing->ToImVec(utils->color_cycle()), true, 15);
 		ImGui::Spacing();
 		ImGui::PushFont(menuFont);
 		ImGui::Text(" ");
@@ -1532,6 +1564,26 @@ void Menu::WatermarkSolid()
 	ImGuiIO& io = ImGui::GetIO();
 	if (settings->keybinds.close == true)
 		exit(0);
+	if (settings->keybinds.Pause == true)
+	{
+		bool xAK = false;
+		bool xLR = false;
+		bool xMP5 = false;
+		bool xSMG = false;
+		bool xThompson = false;
+		char str2;
+		bool xSemi = false;
+		bool xP250 = false;
+		bool xM249 = false;
+		bool x8x = false;
+		bool xHolo = false;
+		bool xSimple = false;
+		bool xSuppressor = false;
+		bool xMuzzleBoost = false;
+		bool xPython = false;
+		bool xRevolver = false;
+	}
+
 	ImGuiStyle* style = &ImGui::GetStyle();
 	ImGui::PushFont(tabFont);
 	const float DISTANCE = 10.0f;
@@ -1603,9 +1655,13 @@ void Menu::Render() {
 
 	ImGui::Begin("PlagueWare Contents", &isOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiConfigFlags_NavEnableKeyboard | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar); {
 
-
+		//rgb line from csgo
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImGui::SameLine(6.f);
+		const auto [r, g, b, y] { drawing->ToImVec(utils->color_cycle4()) };
+		ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p.x, p.y), ImVec2(p.x, p.y), ImColor(r, g, b), 6, ImDrawCornerFlags_TopLeft | ImDrawCornerFlags_TopRight);
+
+
+
 		style->Colors[ImGuiCol_ChildBg] = ImColor(0, 0, 0, 0);
 
 		ImGui::BeginChild("Menu Contents", ImVec2(400.f, 548.f), false); {
@@ -1627,7 +1683,7 @@ void Menu::Render() {
 					ImGui::TabSpacer("##Top Spacer", ImVec2(75.f, 10.f));
 
 					if (ImGui::SelectedTab("Guns", ImVec2(75.f, 75.f))) tab = 0;
-					if (ImGui::Tab("Config", ImVec2(75.f, 75.f))) tab = 1;
+					if (ImGui::Tab("Config",  ImVec2(75.f, 75.f))) tab = 1;
 					if (ImGui::Tab("Keybinds", ImVec2(75.f, 75.f))) tab = 2;
 					if (ImGui::Tab("Misc", ImVec2(75.f, 75.f))) tab = 3;
 
@@ -1675,7 +1731,6 @@ void Menu::Render() {
 			ImGui::BeginChild("Tab Contents", ImVec2(300.f, 322.f), false); {
 				//inner border
 				style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 0);
-
 				switch (tab) {
 
 				case 0:
@@ -1725,10 +1780,12 @@ void Menu::Guns() {
 
 	ImGuiStyle* style = &ImGui::GetStyle();
 	InsertSpacer("Top Spacer");
-
+	style->WindowPadding = ImVec2(8, 10);
 		InsertGroupBoxLeft("Guns", 286.f); {
 			style->WindowPadding = ImVec2(8, 8);
 			ImGui::Text("Guns:"); style->WindowPadding = ImVec2(8, 2);
+			//ImGui::Image((ImTextureID)my_texture_srv_gpu_handle.ptr, ImVec2((float)my_image_width, (float)my_image_height));
+
 			ImGui::Combo(" ", &selectedItem, items, IM_ARRAYSIZE(items)); style->ItemSpacing = ImVec2(8, 2);
 			ImGui::Text("Scopes:"); style->WindowPadding = ImVec2(8, 2);
 			ImGui::Combo("  ", &selectedScope, scopes, IM_ARRAYSIZE(scopes)); style->ItemSpacing = ImVec2(8, 2);
@@ -1744,10 +1801,11 @@ void Menu::Guns() {
 void Menu::Config() {
 
 	ImGuiStyle* style = &ImGui::GetStyle();
-	InsertSpacer("Top Spacer");
 
+	InsertSpacer("Top Spacer");
+	style->WindowPadding = ImVec2(8, 10);
 	InsertGroupBoxLeft("Guns", 286.f); {
-		style->WindowPadding = ImVec2(8, 8);
+		ImGui::Text("Pause Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.Pause, NULL);;
 		ImGui::Text("Menu Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.MenuKey, NULL);;
 		ImGui::Text("AK47 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  @@", &settings->keybinds.akKeybind, NULL);;
 		ImGui::Text("LR3000 Keybind: "); ImGui::SameLine(); ImGui::Keybind(" ", &settings->keybinds.lrKeybind, NULL);;
@@ -1767,6 +1825,7 @@ void Menu::Config() {
 		ImGui::Text("Small Furnace Splitter: "); ImGui::SameLine(); ImGui::Keybind("@", &settings->keybinds.furnaceKeybind, NULL);;
 		ImGui::Text("Large Furnace Splitter: "); ImGui::SameLine(); ImGui::Keybind("@@", &settings->keybinds.lfurnaceKeybind, NULL);;
 		ImGui::Text("Auto Upgrade Keybind: "); ImGui::SameLine(); ImGui::Keybind("@@@", &settings->keybinds.upgradeKeybind, NULL);;
+		ImGui::Text("Auto Code Lock: "); ImGui::SameLine(); ImGui::Keybind("  @@@@", &settings->keybinds.codelockkeybind , NULL);;
 		style->ItemSpacing = ImVec2(0, 0);
 		style->WindowPadding = ImVec2(6, 6);
 
@@ -1783,9 +1842,10 @@ void Menu::Keybinds() {
 
 	ImGuiStyle* style = &ImGui::GetStyle();
 	InsertSpacer("Top Spacer");
-
+	
+	style->WindowPadding = ImVec2(8, 10);
 	InsertGroupBoxLeft("Guns", 286.f); {
-		style->WindowPadding = ImVec2(8, 8);
+		
 
 		ImGui::InputDouble("Sensitivity: ", &uSens, 0.1, 100, 0); style->ItemSpacing = ImVec2(8, 2);
 		ImGui::Text("Randomization:"); style->ItemSpacing = ImVec2(8, 2);
@@ -1793,7 +1853,6 @@ void Menu::Keybinds() {
 		InsertIntSlider("X Control %", xControlP, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("Crosshair Type", settings->visuals.crosshair.crossnum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Sound", settings->features.uSound); style->ItemSpacing = ImVec2(8, 2);
-		InsertCheckbox("Overlay", settings->visuals.watermark.enabled); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Customize Menu", settings->visuals.CustomizeMenu.enabled); style->ItemSpacing = ImVec2(8, 2);
 		ImGui::SameLine(); HelpMarker("Show Customization Menu");
 	
@@ -1804,10 +1863,11 @@ void Menu::Keybinds() {
 		if (ImGui::Button("Load Config")) {
 			loadConfig();
 		}
-	
+		InsertCheckbox("Toggle Normal Overlay", settings->visuals.watermark.enabled); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Toggle Solid Overlay", settings->visuals.Watermarksolid.enabled); style->ItemSpacing = ImVec2(8, 2);
 		if (settings->visuals.Watermarksolid.enabled)
 		{
+			style->WindowPadding = ImVec2(8, 20);
 			ImGui::Combo(" ", &WMenuPos, wpos, IM_ARRAYSIZE(wpos)); style->ItemSpacing = ImVec2(8, 2);
 			{
 				if (wpos[WMenuPos] == "Top-left") {
@@ -1833,31 +1893,62 @@ void Menu::Keybinds() {
 	} InsertEndGroupBoxLeft("Aimbot Cover", "Config");
 }
 
+
 void Menu::Misc() {
 
 
 	ImGuiStyle* style = &ImGui::GetStyle();
 	InsertSpacer("Top Spacer");
-
+	style->WindowPadding = ImVec2(8, 20);
 	InsertGroupBoxLeft("Guns", 286.f); {
-		style->WindowPadding = ImVec2(8, 8);
+		style->WindowPadding = ImVec2(8, 10);
 		InsertCheckbox("Large Furnace Splitter", islfurnace); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Small Furnace Splitter", isFurnace); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Auto Fire", isAutofire); style->ItemSpacing = ImVec2(8, 2);
-		InsertCheckbox("Anti Afk", isAntiAfk); style->ItemSpacing = ImVec2(8, 2);
+		InsertCheckbox("Anti Afk", isAntiAfk);
+		InsertCheckbox("Anti Afk [UKN]", isAntiAfkUKN);
+		}
+		if (GetAsyncKeyState(VK_ESCAPE)) {
+			isAntiAfkUKN == false;
+			isAntiAfk == false;
+	}
+		while (isAntiAfk == true)
+		{
+			Sleep(1000);
+			SetCursorPos(1390, 540);
+			Sleep(500000);
+			SetCursorPos(1100, 540);
+			Sleep(500000);
+
+
+		}
+		while (isAntiAfkUKN == true)
+		{
+			Sleep(1000);
+			SetCursorPos(1390, 540);
+			Sleep(15000);
+			SetCursorPos(1100, 540);
+			Sleep(15000);
+
+			
+		}
+		InsertCheckbox("Auto Code: ", isAutoCode); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::InputInt("Enter Code:", &CodeLockNum, 1, 10);
+
+
 		InsertCheckbox("Night Mode Overlay", settings->globalvars.isNightMode); style->ItemSpacing = ImVec2(8, 2);
 		InsertCheckbox("Hipfire", settings->features.isHipfire); style->ItemSpacing = ImVec2(8, 2);
-
+		InsertCheckbox("Count Ammo", isCountingAmmo); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::SameLine(); HelpMarker("Actively Count the Ammo in Your Weapon");
 		ImGui::Text("Auto Upgrade: 0 = None, 1 = Wood,");
 		ImGui::Text(" 2 = Stone, 3 = Metal, 4 = HQM");
 		InsertIntSlider(" ", bgradeNum, 0, 4, "%d"); style->ItemSpacing = ImVec2(8, 2);
-		InsertCheckbox("Count Ammo", isCountingAmmo); style->ItemSpacing = ImVec2(8, 2);
-		ImGui::SameLine(); HelpMarker("Actively Count the Ammo in Your Weapon");
+		style->WindowPadding = ImVec2(0, 10);
 		if (ImGui::Button("Exit Script")) {
 			exit(0);
 		}
 		style->ItemSpacing = ImVec2(0, 0);
 		style->WindowPadding = ImVec2(6, 6);
-	} InsertEndGroupBoxLeft("Aimbot Cover", "Misc");
+	 InsertEndGroupBoxLeft("Aimbot Cover", "Misc");
 }
 Menu* menu = new Menu();

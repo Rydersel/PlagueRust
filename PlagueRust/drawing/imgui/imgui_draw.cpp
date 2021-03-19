@@ -186,7 +186,7 @@ void ImGui::StyleColorsDark(ImGuiStyle* dst)
 	colors[ImGuiCol_Text] = ImColor(213, 213, 213, 255);
 	colors[ImGuiCol_MenuTheme] = ImColor(180, 36, 209, 255);
 	colors[ImGuiCol_TabText] = ImColor(100, 100, 100, 255);
-	colors[ImGuiCol_TextShadow] = ImColor(2, 2, 2, 255);
+	colors[ImGuiCol_TextShadow] = ImColor(180, 36, 208, 125);
 	colors[ImGuiCol_TabTextHovered] = ImColor(185, 185, 185, 255);
 	colors[ImGuiCol_TextDisabled] = ImColor(125, 125, 125, 255);
 	colors[ImGuiCol_WindowBg] = ImColor(40, 40, 40, 255);
@@ -223,7 +223,7 @@ void ImGui::StyleColorsDark(ImGuiStyle* dst)
 	colors[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
 	colors[ImGuiCol_Tab] = ImColor(34, 34, 34, 0);
 	colors[ImGuiCol_TabHovered] = ImColor(51, 51, 51, 0);
-	colors[ImGuiCol_TabActive] = ImColor(51, 51, 51, 0);
+	colors[ImGuiCol_TabActive] = ImColor(180, 36, 208, 200);
 	colors[ImGuiCol_TabUnfocused] = ImLerp(colors[ImGuiCol_Tab], colors[ImGuiCol_TitleBg], 0.80f);
 	colors[ImGuiCol_TabUnfocusedActive] = ImLerp(colors[ImGuiCol_TabActive], colors[ImGuiCol_TitleBg], 0.40f);
 	colors[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);

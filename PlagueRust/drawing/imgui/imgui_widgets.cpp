@@ -679,7 +679,7 @@ bool ImGui::TabEx(const char* label, const ImVec2& size_arg, ImGuiButtonFlags fl
     // =========================
 
     auto backgroundColor = ImColor(12, 12, 12);
-    auto innerBorderColor = ImColor(0, 0, 0);
+    auto innerBorderColor = ImColor(0, 0, 0); 
     auto outerBorderColor = ImColor(48, 48, 48);
 
     window->DrawList->AddRectFilledMultiColor(bb.Min - ImVec2(0, 2), bb.Max, backgroundColor, backgroundColor, backgroundColor, backgroundColor);
@@ -2157,9 +2157,11 @@ bool ImGui::Keybind(const char* str_id, int* current_key, int* key_style) {
 
     if (edit_requested) {
         if (g.ActiveId != id) {
-            memset(io->MouseDown, 0, sizeof(io->MouseDown));
+
             memset(io->KeysDown, 0, sizeof(io->KeysDown));
-            *current_key = 0;
+            memset(io->MouseDown, 0, sizeof(io->MouseDown));
+            
+            int key = 0;
         }
 
         SetActiveID(id, window);
@@ -2195,8 +2197,8 @@ bool ImGui::Keybind(const char* str_id, int* current_key, int* key_style) {
             }
         }
 
-        if (!value_changed) {
-            for (auto i = VK_BACK; i <= VK_RMENU; i++) {
+        if (g.ActiveId == id) {
+            for (auto i = 0; i < 5; i++) {
                 if (io->KeysDown[i]) {
                     key = i;
                     value_changed = true;

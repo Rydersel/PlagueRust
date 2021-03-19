@@ -13,7 +13,8 @@ public:
 	void Render();
 	void Shutdown();
 	void ColorPicker(const char* name, float* color, bool alpha);
-
+	ImFont* futura_large;
+	ImFont* gotham;
 	void Guns();
 	void Config();
 	void Keybinds();

@@ -48,6 +48,7 @@ bool Drawing::CreateDeviceD3D()
 
 bool Drawing::Initialize()
 {
+   
     WINDOWPLACEMENT g_wpPrev;
     DWORD dwStyle = GetWindowLong(h_Game, GWL_STYLE);
     MONITORINFO mi = { sizeof(mi) };
@@ -62,6 +63,9 @@ bool Drawing::Initialize()
             mi.rcMonitor.bottom - mi.rcMonitor.top,
             SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
     }
+
+   
+
     //Possible Detect Vector
     wc = { sizeof(WNDCLASSEX), ACS_TRANSPARENT, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Internet Explorer"), NULL };
     RegisterClassEx(&wc);
@@ -108,6 +112,7 @@ bool Drawing::Initialize()
         }
 
         ImGui_ImplDX11_NewFrame();
+
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 

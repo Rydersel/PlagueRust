@@ -17,7 +17,9 @@ bool var = true;
 bool xSound = true;
 std::string userWeapon = "NONE", userScope = "NONE", userBarrel = "NONE", userSound = "ON";
 static const char* items[]{ "AK47", "LR-300", "MP5", "SMG", "Thompson", "Semi", "M249", "Python", "Revolver", "P250", "None" };
+
 static int selectedItem = 10;
+static int selectedAFK = 0;
 static const char* scopes[]{ "Holo", "Simple", "8x", "None" };
 static const char* wpos[]{ "Top-left", "Top-right", "Bottom-left", "Bottom-right" };
 static int selectedScope = 3;
@@ -36,6 +38,7 @@ bool isFurnace = false;
 int bgradeNum = 0;
 bool isAutofire;
 bool isAntiAfk;
+bool isAntiAfkUKN = false;
 //Keybinds
 std::string keyboardMode = "100%";
 std::string str;
@@ -61,25 +64,25 @@ std::vector<doublevector> AKRecoil = { {-69.0, 100.0},
 {76.0, 39.0},
 {84.0, 29.0},
 {85.0, 19.0},
-{76.0, 20.0},
-{60.0, 37.0},
-{34.0, 50.0},
-{2.0, 59.0},
-{-30.0, 65.0},
-{-55.0, 67.0},
-{-74.0, 64.0},
-{-86.0, 59.0},
-{-92.0, 49.0},
-{-91.0, 34.0},
-{-84.0, 17.0},
-{-70.0, 10.0},
-{-49.0, 28.0},
-{-22.0, 42.0},
-{24.0, 51.0},
-{72.0, 56.0},
-{97.0, 57.0},
-{98.0, 51.0},
-{77.0, 43.0} };
+{79.0, 23.0}, //changed by 3 from here
+{63.0, 40.0},
+{37.0, 53.0},
+{5.0, 62.0},
+{-33.0, 68.0},
+{-58.0, 70.0},
+{-77.0, 67.0},
+{-89.0, 62.0},
+{-95.0, 52.0},
+{-94.0, 37.0},
+{-87.0, 20.0},
+{-73.0, 13.0},
+{-52.0, 31.0},
+{-25.0, 45.0},
+{27.0, 54.0},
+{75.0, 59.0},
+{100.0, 60.0},
+{101.0, 54.0},
+{80.0, 46.0} };
 
 std::vector<double> ReplacementFor_ControlTime_Ak47 = { 121.96149709966872,92.6333814724611,138.60598637206294,113.37874368443146,66.25151186427745,66.29530438019354,75.9327831420658,85.05526144256157,
 89.20256669256554,86.68010184667988,78.82145888317788,70.0451048111144,60.85979604582978,59.51642457624619,71.66762996283607,86.74060009403034,98.3363599080854,104.34161954944257,
@@ -97,8 +100,8 @@ std::vector<myvector> CustomRecoil = { {-28, 52}, {-10, 53}, {0, 53}, {11, 44}, 
 
 std::vector<myvector> ThompsonRecoil = { {-29, 63}, {-12, 61}, {9, 61}, {21, 55}, {25, 52}, {21, 43}, {5, 32}, {-16, 33}, {-24, 25}, {-24, 26}, {-14, 21}, {7, 17}, {16, 18},
 {23, 16}, {25, 17}, {8, 16}, {-5, 5}, {-13, 15}, {-14, 8} };
-std::vector<myvector> SemiRecoil = { {0, 75}, {0, 75} };
-std::vector<myvector> PythonRecoil = { {0, 127}, {0, 127} };
+std::vector<myvector> SemiRecoil = { {-5, 85}, {-5, 85} };
+std::vector<myvector> PythonRecoil = { {0, 147}, {0, 147} };
 std::vector<myvector> M249Recoil = { {0,58},{0,58} };
 std::vector<myvector> RevolverRecoil = { {0,20}, {0,20} };
 std::vector<myvector> P250Recoil = { {0, 40}, {0,40} };

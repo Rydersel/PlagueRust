@@ -29,6 +29,13 @@ public:
             bool rainbowmode;
         } CustomizeMenu;
 
+
+        struct AntiAFK {
+            bool enabled;
+            bool rainbowmode;
+        } AntiAFK;
+
+
         struct players {
             struct name {
                 bool enabled;
@@ -45,6 +52,7 @@ public:
 
             struct skeleton {
                 bool enabled;
+
                 int thickness = 1;
                 float color[4] = { 0, 0, 0, 1 };
             } skeleton;
@@ -83,6 +91,7 @@ public:
     } features;
 
     struct keybinds {
+        int Pause = 112;
         int akKeybind = 113;
         int lrKeybind = 114;
         int mp5Keybind = 115;
@@ -126,6 +135,7 @@ public:
     float* color_cycle();
     float* color_cycle2();
     float* color_cycle3();
+    float* color_cycle4();
     float color_hue[3] = { 255, 0, 0 };
     int color_iteration = 0;
 
