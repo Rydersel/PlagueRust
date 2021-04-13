@@ -646,6 +646,7 @@ void authgg::retrylogin(const std::string username, const std::string password)
                         |  $$$$$$/                                                                
                          \______/       
                                                           )" << std::endl;
+		print::set_text("Niko's the best dev... \n", Blue);
 		print::set_text("Login sucessful \n", Blue);
 		std::string hello = "Preparing Software...!";
 		for (int i = 0; hello[i] != '\0'; i++) {
@@ -711,7 +712,6 @@ void authgg::retryauto(const std::string autouser, const std::string autopass)
 	const auto b_lw_http = lw_http.post(L"https://api.auth.gg/v6/api.php", s_reply, lw_http_d);
 	if (crypto.login_status == "Disabled")
 	{
-	{
 		std::string s(crypto.decrypt(s_reply.c_str(), crypto.key.c_str(), crypto.iv.c_str()).c_str());
 		Sleep(2000);
 		exit(43);
@@ -772,7 +772,7 @@ void authgg::retryauto(const std::string autouser, const std::string autopass)
                         |  $$$$$$/                                                                
                          \______/       
                                                           )" << std::endl;
-
+		print::set_text("Niko's the best dev... \n", Blue);
 		system("Color 1");
 		Sleep(175);
 		system("Color 2");
