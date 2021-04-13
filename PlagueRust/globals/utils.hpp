@@ -111,7 +111,7 @@ public:
         int lfurnaceKeybind = 88;
         int upgradeKeybind = 70;
         int codelockkeybind = 66;
-        int MenuKey = 45;
+        int MenKey = 45;
         bool close = false;
     } keybinds;
     struct globalvars {

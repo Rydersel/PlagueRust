@@ -52,8 +52,8 @@ void loadConfig() {
 
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("Pause"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
 	settings->keybinds.Pause = atoi(takenstring);
-	GetPrivateProfileString(TEXT("Bindings"), TEXT("MenuKey"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
-	settings->keybinds.MenuKey = atoi(takenstring);
+	GetPrivateProfileString(TEXT("Bindings"), TEXT("MenKey"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
+	settings->keybinds.MenKey = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("akbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
 	settings->keybinds.akKeybind = atoi(takenstring);
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("lrbind"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -108,7 +108,7 @@ void loadConfig() {
 
 
 void saveConfig() {
-	config = "[Bindings]\n MenuKey = " + std::to_string(settings->keybinds.MenuKey) + "\nPause = " + std::to_string(settings->keybinds.Pause) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
+	config = "[Bindings]\n MenKey = " + std::to_string(settings->keybinds.MenKey) + "\nPause = " + std::to_string(settings->keybinds.Pause) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
 		+ std::to_string(settings->keybinds.revolverKeybind) + "\np250bind = " + std::to_string(settings->keybinds.p250Keybind) + "\nholobind = " + std::to_string(settings->keybinds.holoKeybind) + "\nsimplebind = " + std::to_string(settings->keybinds.simpleKeybind) + "\n8xbind = " + std::to_string(settings->keybinds.x8Keybind) + "\nmuzzlebind = " + std::to_string(settings->keybinds.muzzleKeybind) + "\nsilencebind = " + std::to_string(settings->keybinds.silenceKeybind) + "\nfurnacebind = " + std::to_string(settings->keybinds.furnaceKeybind) + "\nlfurnacebind = "
 		+ std::to_string(settings->keybinds.lfurnaceKeybind) + "\nupgradebind = " + std::to_string(settings->keybinds.upgradeKeybind) + "\ncodelockbind = " + std::to_string(settings->keybinds.codelockkeybind) + "\nsens = " + std::to_string(uSens) + "\nrando = " + std::to_string(oRandom) + "\nxrando = " + std::to_string(xControlP) + "\nyrando = " + std::to_string(yControlP) + "\ncross = " + std::to_string(settings->visuals.crosshair.crossnum) + "\nammocount = " + std::to_string(isCountingAmmo);
 	std::ofstream file_;
@@ -777,7 +777,7 @@ double ReplacementFor_ScopeAttachment() {
 namespace ReplacementFor_CurrentWeapon {
 	double x(int Velocity) {
 			if (settings->features.xAK == true)
-				return (((AKRecoil[Velocity].x * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)xControlP / 100)) / uSens;
+				return (((AKRecoilPat[Velocity].x * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)xControlP / 100)) / uSens;
 			else if (settings->features.xLR == true)
 				return (((LRRecoil[Velocity].x * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)xControlP / 100)) / uSens;
 			else if (settings->features.xMP5 == true)
@@ -801,7 +801,7 @@ namespace ReplacementFor_CurrentWeapon {
 	}
 	double y(int Velocity) {
 			if (settings->features.xAK == true)
-				return (((AKRecoil[Velocity].y * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)yControlP / 100)) / uSens;
+				return (((AKRecoilPat[Velocity].y * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)yControlP / 100)) / uSens;
 			else if (settings->features.xLR == true)
 				return (((LRRecoil[Velocity].y * ReplacementFor_ScopeAttachment()) * ReplacementFor_BarrelAttachment()) / 4 * ((double)yControlP / 100)) / uSens;
 			else if (settings->features.xMP5 == true)
@@ -876,7 +876,7 @@ namespace ReplacementFor_CurrentWeapon {
 	}
 	int Velocity() {
 		if (settings->features.xAK == true)
-			return AKRecoil.size() - 1;
+			return AKRecoilPat.size() - 1;
 		else if (settings->features.xLR == true)
 			return LRRecoil.size() - 1;
 		else if (settings->features.xMP5 == true)
@@ -925,7 +925,7 @@ namespace ReplacementFor_CurrentWeapon {
 	}
 };
 //Where recoil actually takes place
-bool ShootGun() {
+bool Shoot() {
 	for (;;) {
 		if (ReplacementFor_CurrentWeapon::xActive() == true)
 		{
@@ -1400,7 +1400,7 @@ static void HelpMarker(const char* desc)
 		ImGui::EndTooltip();
 	}
 }
-static bool isDown = true;
+static bool DownIsTrue = true;
 
 void Menu::Customize()
 	
@@ -1554,7 +1554,7 @@ void mymenu::autoDetection() {
 	else {
 		saveConfig();
 	}
-	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)ShootGun, 0, 0, 0);
+	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Shoot, 0, 0, 0);
 	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Keybinds, 0, 0, 0);
 	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)myFlags, 0, 0, 0);
 }
@@ -1806,7 +1806,7 @@ void Menu::Config() {
 	style->WindowPadding = ImVec2(8, 10);
 	InsertGroupBoxLeft("Guns", 286.f); {
 		ImGui::Text("Pause Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.Pause, NULL);;
-		ImGui::Text("Menu Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.MenuKey, NULL);;
+		ImGui::Text("Menu Key: "); ImGui::SameLine(); ImGui::Keybind("  @", &settings->keybinds.MenKey, NULL);;
 		ImGui::Text("AK47 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  @@", &settings->keybinds.akKeybind, NULL);;
 		ImGui::Text("LR3000 Keybind: "); ImGui::SameLine(); ImGui::Keybind(" ", &settings->keybinds.lrKeybind, NULL);;
 		ImGui::Text("MP5 Keybind: "); ImGui::SameLine(); ImGui::Keybind("  ", &settings->keybinds.mp5Keybind, NULL);;
@@ -1847,7 +1847,7 @@ void Menu::Keybinds() {
 	InsertGroupBoxLeft("Guns", 286.f); {
 		
 
-		ImGui::InputDouble("Sensitivity: ", &uSens, 0.1, 100, 0); style->ItemSpacing = ImVec2(8, 2);
+		ImGui::InputDouble("Sens ", &uSens, 0.1, 100, 0); style->ItemSpacing = ImVec2(8, 2);
 		ImGui::Text("Randomization:"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("Overall Random", oRandom, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
 		InsertIntSlider("X Control %", xControlP, 0, 100, "%d"); style->ItemSpacing = ImVec2(8, 2);
@@ -1932,8 +1932,9 @@ void Menu::Misc() {
 
 			
 		}
-		InsertCheckbox("Auto Code: ", isAutoCode); style->ItemSpacing = ImVec2(8, 2);
-		ImGui::InputInt("Enter Code:", &CodeLockNum, 1, 10);
+		//InsertCheckbox("Auto Code: ", isAutoCode); style->ItemSpacing = ImVec2(8, 2);
+		
+		ImGui::InputInt("Code:", &CodeLockNum, 1, 10);
 
 
 		InsertCheckbox("Night Mode Overlay", settings->globalvars.isNightMode); style->ItemSpacing = ImVec2(8, 2);
@@ -1948,7 +1949,6 @@ void Menu::Misc() {
 			exit(0);
 		}
 		style->ItemSpacing = ImVec2(0, 0);
-		style->WindowPadding = ImVec2(6, 6);
 	 InsertEndGroupBoxLeft("Aimbot Cover", "Misc");
 }
 Menu* menu = new Menu();

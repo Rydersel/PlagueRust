@@ -54,7 +54,7 @@ struct doublevector
 	double y;
 };
 
-std::vector<doublevector> AKRecoil = { {-69.0, 100.0},
+std::vector<doublevector> AKRecoilPat = { {-69.0, 100.0},
 {10.0, 92.0},
 {-110.0, 83.0},
 {-85.0, 75.0},

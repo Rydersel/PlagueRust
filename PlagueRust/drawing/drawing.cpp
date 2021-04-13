@@ -15,8 +15,8 @@
 #include <io.h>
 
 using namespace ImGui;
-static bool isDown = true;
-static bool isClicked = false;
+static bool DownIsTrue = true;
+static bool ClickedTrue = false;
 bool Drawing::CreateDeviceD3D()
 {
     DXGI_SWAP_CHAIN_DESC sdr;
@@ -135,20 +135,20 @@ bool Drawing::Initialize()
                 fade -= 0.01f;
         }
 
-        if (GetAsyncKeyState(settings->keybinds.MenuKey)) {
-            isClicked = false;
-            isDown = true;
+        if (GetAsyncKeyState(settings->keybinds.MenKey)) {
+            ClickedTrue = false;
+            DownIsTrue = true;
         }
-        else if (!GetAsyncKeyState(settings->keybinds.MenuKey) && isDown) {
-            isClicked = true;
-            isDown = false;
+        else if (!GetAsyncKeyState(settings->keybinds.MenKey) && DownIsTrue) {
+            ClickedTrue = true;
+            DownIsTrue = false;
         }
         else {
-            isClicked = false;
-            isDown = false;
+            ClickedTrue = false;
+            DownIsTrue = false;
         }
 
-        if (isClicked) { 
+        if (ClickedTrue) { 
             menu->isOpen = !menu->isOpen;
             long style = GetWindowLongPtr(h_hWnd, GWL_EXSTYLE);
             if (menu->isOpen) {
@@ -203,6 +203,14 @@ LRESULT WINAPI Drawing::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
+void Drawing::CreateRenderTarget()
+{
+    ID3D11Texture2D* pBackBuffer;
+    g_pSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
+    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &g_mainRenderTargetView);
+    pBackBuffer->Release();
+}
+
 
 void Drawing::Shutdown()
 {
@@ -213,15 +221,6 @@ void Drawing::Shutdown()
     DestroyWindow(h_hWnd);
     UnregisterClass(wc.lpszClassName, wc.hInstance);
     std::exit(0);
-}
-
-
-void Drawing::CreateRenderTarget()
-{
-    ID3D11Texture2D* pBackBuffer;
-    g_pSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
-    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &g_mainRenderTargetView);
-    pBackBuffer->Release();
 }
 
 

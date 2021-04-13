@@ -121,7 +121,7 @@ int main()
    // crypto.secret = "xxM8F1ooY3ApPBfpJEZtFRJBHLF5QP5Ok2n";
     crypto.secret = "mb6bgDAU5dL2alSMjjsEWRcxFEi39y8gEq9";
     crypto.apikey = "94474811782731843521956429331157219";
-    crypto.version = "5.0";
+    crypto.version = "5.1";
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
     //                                Initialization                                    //
@@ -129,7 +129,7 @@ int main()
     authgg::GenerateSeed();
     authgg::Initialize();
     std::string choice;
-    SetConsoleTitle("Plague Rust");
+    SetConsoleTitle("Discord");
 
     
     std::cout << R"( /$$$$$$$  /$$                                                                                 
