@@ -80,11 +80,10 @@ int main()
     extern c_crypto crypto;
     ///////////////////////////////////////////////////////////////////////////////////////
     //                              Application Settings
-    crypto.aid = "295521";
-   // crypto.secret = "xxM8F1ooY3ApPBfpJEZtFRJBHLF5QP5Ok2n";
-    crypto.secret = "mb6bgDAU5dL2alSMjjsEWRcxFEi39y8gEq9";
-    crypto.apikey = "94474811782731843521956429331157219";
-    crypto.version = "5.1";
+    crypto.aid = "Null";
+    crypto.secret = "Null";
+    crypto.apikey = "Null";
+    crypto.version = "Null";
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
     //                                Initialization                                    //
