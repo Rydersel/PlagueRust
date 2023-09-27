@@ -24,7 +24,7 @@ On a base level, the goal of this program is to simply automatically adjust for 
 
 # Main Challenges:
 
-**-Evading detection by the game's Anti-Cheat**
+**-Evading detection by the game's Anti-Cheat(EAC)**
 
 **-Adjusting for randomness caused by weapon spread**
 
