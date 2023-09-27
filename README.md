@@ -9,11 +9,7 @@ never hooking into the game process or editing any of its memory.
 ```
 This code is part of a study done on Rust's Anti-Cheat. More info can be found here: ([Study On Anti-Cheats](https://github.com/Rydersel/StudyOnAnticheats/wiki))
 
-
-
-This program is an external recoil cheat for the video game Rust
-
-# Description
+## Description
 
 "Rust is a multiplayer survival video game developed by Facepunch Studios. The objective of Rust is to survive in the wilderness using gathered or stolen materials. Players must successfully manage their hunger, thirst, and health, or risk dying. Despite the presence of hostile animals such as bears and wolves, the primary threat to the player is other players due to the game being solely multiplayer." (Via Wikipedia).
 
@@ -21,10 +17,21 @@ There are a variety of different weapons in Rust from Assault rifles like the AK
 
 On a base level, the goal of this program is to simply automatically adjust for each individual weapon's recoil making each weapon fire in a perfectly straight line. As you will see though this is a lot easier said than done.
 
-#Features
+## Main Challenges:
+
+**-Evading detection by the game's Anti-Cheat(EAC)**
+
+**-Adjusting for randomness caused by weapon spread**
+
+**-Scailing recoil patterns based on mouse placement and screen resolution**
+
+**-Adjusting recoil pattern depending on bullets in clip 
 
 
-**Main Features:**
+## Features
+
+
+### **Main Features:**
 ```
 -Recoil Control for all weapons
 -Variable X and Y recoil randomization
@@ -33,7 +40,7 @@ On a base level, the goal of this program is to simply automatically adjust for 
 -Auto Ammo Detection
 -Fully customizable keybinds for all functions
 ```
-**Misc Features:**
+### **Misc Features:**
 ```
 -Auto Smelt (Small and Large Furnaces)
 -Auto Codelock
@@ -44,21 +51,12 @@ On a base level, the goal of this program is to simply automatically adjust for 
 -5 Different Crosshair Overlays
 -Custom Firing Sounds
 ```
-**Work In Progress Features:**
+### **Work In Progress Features:**
 ```
 -External Aimbot (Detects enemy positions based on a trained nural net model)
 -Player highlighting (Places a bright box around enemies to make them easier to spot in darker enviroments)
 ```
 
-# Main Challenges:
-
-**-Evading detection by the game's Anti-Cheat(EAC)**
-
-**-Adjusting for randomness caused by weapon spread**
-
-**-Scailing recoil patterns based on mouse placement and screen resolution**
-
-**-Adjusting recoil pattern depending on bullets in clip 
 
 
 
