@@ -80,7 +80,7 @@ int main()
     extern c_crypto crypto;
     ///////////////////////////////////////////////////////////////////////////////////////
     //                              Application Settings
-    crypto.aid = "Null";
+    crypto.aid = "Null"; 
     crypto.secret = "Null";
     crypto.apikey = "Null";
     crypto.version = "Null";
@@ -179,7 +179,7 @@ int main()
 
                      {
                          AllocConsole();
-                         SetConsoleTitleW(L"PlagueWare - Rust Debug");
+                         SetConsoleTitleW(L"PlagueWare - Rust Debug"); //Application Title
                          freopen("CONIN$", "r", stdin);
                          freopen("CONOUT$", "w", stdout);
                      }
@@ -242,6 +242,7 @@ int main()
                 }
 
                 x = true;
+		//User Login 
                 print::set_text("\Enter Username: ", LightBlue);
                 std::cin >> username;
                 print::set_text("\Enter Password: ", LightBlue);
@@ -249,7 +250,7 @@ int main()
                 std::cin >> password;
                 Sleep(300);
                 std::cout << " " << std::endl;
-                std::string hello = "Loading...";
+                std::string hello = "Loading..."; //Fake loading screen ;)
                 for (int i = 0; hello[i] != '\0'; i++) {
                     if (hello[i] == ' ')
                         Sleep(175 + rand() % 150);
@@ -258,7 +259,7 @@ int main()
                     std::cout << hello[i];
                 }
                 Sleep(2000);
-                authgg::Login(username, password);
+                authgg::Login(username, password); //Send login request
                 print::set_text("   [Done] \n\n", Green);
                 Sleep(300);
 
@@ -288,7 +289,7 @@ int main()
     }
 
     /* Find Rust Window */
-    drawing->h_Game = FindWindowA("UnityWndClass", "Rust");
+    drawing->h_Game = FindWindowA("UnityWndClass", "Rust"); 
     if (!drawing->h_Game)
     {
         print(4, "\n[:(] ", "Rust Not Found! Please Open Rust Before Opening The Loader \n");
@@ -338,7 +339,7 @@ int main()
             }
 
             std::this_thread::sleep_for(std::chrono::milliseconds(300));
-            if (settings->keybinds.close == true) {
+            if (settings->keybinds.close == true) { 
                 exit(0);
             }
         }
