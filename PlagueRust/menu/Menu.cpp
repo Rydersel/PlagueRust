@@ -47,7 +47,7 @@ namespace INIT
 #define NUM_PARAMS 2
 LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-void loadConfig() {
+void loadConfig() {  //Load users previously config from file
 	char takenstring[100];
 
 	GetPrivateProfileString(TEXT("Bindings"), TEXT("Pause"), TEXT("fail while retrieving"), takenstring, 100, TEXT(".\\Config.inv"));
@@ -107,7 +107,7 @@ void loadConfig() {
 }
 
 
-void saveConfig() {
+void saveConfig() { //Write user config info to file
 	config = "[Bindings]\n MenKey = " + std::to_string(settings->keybinds.MenKey) + "\nPause = " + std::to_string(settings->keybinds.Pause) + "\nakbind = " + std::to_string(settings->keybinds.akKeybind) + "\nlrbind = " + std::to_string(settings->keybinds.lrKeybind) + "\nmp5bind = " + std::to_string(settings->keybinds.mp5Keybind) + "\nsmgbind = " + std::to_string(settings->keybinds.smgKeybind) + "\nthompsonbind = " + std::to_string(settings->keybinds.thompsonKeybind) + "\nsemibind = " + std::to_string(settings->keybinds.semiKeybind) + "\nm249bind = " + std::to_string(settings->keybinds.m249Keybind) + "\npythonbind = " + std::to_string(settings->keybinds.pythonKeybind) + "\nrevolverbind = "
 		+ std::to_string(settings->keybinds.revolverKeybind) + "\np250bind = " + std::to_string(settings->keybinds.p250Keybind) + "\nholobind = " + std::to_string(settings->keybinds.holoKeybind) + "\nsimplebind = " + std::to_string(settings->keybinds.simpleKeybind) + "\n8xbind = " + std::to_string(settings->keybinds.x8Keybind) + "\nmuzzlebind = " + std::to_string(settings->keybinds.muzzleKeybind) + "\nsilencebind = " + std::to_string(settings->keybinds.silenceKeybind) + "\nfurnacebind = " + std::to_string(settings->keybinds.furnaceKeybind) + "\nlfurnacebind = "
 		+ std::to_string(settings->keybinds.lfurnaceKeybind) + "\nupgradebind = " + std::to_string(settings->keybinds.upgradeKeybind) + "\ncodelockbind = " + std::to_string(settings->keybinds.codelockkeybind) + "\nsens = " + std::to_string(uSens) + "\nrando = " + std::to_string(oRandom) + "\nxrando = " + std::to_string(xControlP) + "\nyrando = " + std::to_string(yControlP) + "\ncross = " + std::to_string(settings->visuals.crosshair.crossnum) + "\nammocount = " + std::to_string(isCountingAmmo);
@@ -297,7 +297,7 @@ std::string to_string_with_precision(const T a_value, const int n = 6)
 
 
 
-void mouse_move() {
+void mouse_move() { //Auto Smelt
 	if (isFurnace) {
 		SetCursorPos(826, 500);
 		Sleep(100);
@@ -336,7 +336,7 @@ void mouse_move() {
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	}
 }
-bool ammoCount() {
+bool ammoCount() { //Calculate total ammo user has
 	settings->globalvars.weaponAmmo -= 1;
 	if (isCountingAmmo == 0)
 		return true;
@@ -344,7 +344,7 @@ bool ammoCount() {
 		return false;
 	return true;
 }
-void autoCode() {
+void autoCode() { //Auto code-lock
 	int multiple = 0;
 	int leftover = 0;
 	if (!settings->features.uSound) {
@@ -372,7 +372,7 @@ void autoCode() {
 	}
 }
 
-void largeFurnace() {
+void largeFurnace() { //Auto Large Furnace
 	if (islfurnace) {
 		SetCursorPos(695, 500);
 		Sleep(100);
@@ -599,7 +599,7 @@ void largeFurnace() {
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	}
 }
-void autoUpgrade() {
+void autoUpgrade() { //Auto Building Upgrade
 	if (bgradeNum == 1) {
 		mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
 		Sleep(20);
@@ -677,8 +677,8 @@ void SleepFunc(int ms)
 		ReplacementFor_currentTime /= ReplacementFor_timerResolution;
 	}
 }
-//Randomization function
-void xRandomization(double ReplacementFor_delay, double ReplacementFor_control_time, int x, int y) {
+//Variable Randomization function
+void xRandomization(double ReplacementFor_delay, double ReplacementFor_control_time, int x, int y) { /
 	double randomized = 0;
 	double xrandomized = 0;
 	double yrandomized = 0;
@@ -718,7 +718,7 @@ void xRandomization(double ReplacementFor_delay, double ReplacementFor_control_t
 	SleepFunc((int)ReplacementFor_delay - (int)ReplacementFor_control_time);
 }
 // Muzzle Boost
-int ReplacementFor_xMuzzleBoost(float Delay) {
+int ReplacementFor_xMuzzleBoost(float Delay) { 
 	if (settings->features.xMuzzleBoost == true) {
 		float ReplacementFor_difference = Delay * 0.1f;
 		Delay = Delay - ReplacementFor_difference;
@@ -1007,7 +1007,7 @@ bool Shoot() {
 	}
 	return false;
 }
-void Keybinds() {
+void Keybinds() { //Change recoil adjustment via keybind
 
 	for (;;) {
 		if (GetAsyncKeyState(82) != 0) {
