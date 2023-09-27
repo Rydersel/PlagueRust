@@ -7,7 +7,7 @@ Decided to make this code public because its a year old.
 This means that the program runs completely independently from the game,
 never hooking into the game process or editing any of its memory.
 ```
-This code is part of a study done on Rust's Anti-Cheat. More info can be found here: ([Study On Anti-Cheats](https://github.com/Rydersel/StudyOnAnticheats))
+This code is part of a study done on Rust's Anti-Cheat. More info can be found here: ([Study On Anti-Cheats](https://github.com/Rydersel/StudyOnAnticheats/wiki))
 
 
 
