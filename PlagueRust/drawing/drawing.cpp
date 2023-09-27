@@ -351,6 +351,8 @@ auto Drawing::circle(ImVec2 v2_pos, float f_radius, ImVec4 v4_col, float f_thick
     window->DrawList->AddCircle(v2_pos, f_radius, GetColorU32(v4_col), 50, f_thickness);
 }
 
+//Crosshair overlays:
+
 auto Drawing::crosshair(ImVec4 v4_col, float f_thickness, float len, float xoffset, float yoffset) -> void
 {
     ImGuiContext& g = *GImGui;
