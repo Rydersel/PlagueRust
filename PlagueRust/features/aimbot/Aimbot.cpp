@@ -1,7 +1,7 @@
 /**
- * <3 skit#2567
+ * Special thanks to skit#2567 for help with this section
  *
- * don't make this into a shitty p2c
+ *  WORK IN PROGRESS
  */
 
 #include "../../include.hpp"
@@ -98,7 +98,7 @@ float Aimbot::ProjectileSpeed_Normal(uint64_t weapon, float Ammunition_Multiplie
  */
 float Aimbot::BulletDrop(Vector3 v1, Vector3 v2, float BulletSpeed, float BulletGravity, float kin_deltatime)
 {
-	/* you can do this part yourself :) */
+	//TODO
 	return 0.f;
 }
 
@@ -107,7 +107,7 @@ float Aimbot::BulletDrop(Vector3 v1, Vector3 v2, float BulletSpeed, float Bullet
  */
 Vector3 Aimbot::Prediction(Vector3 playerPos, Vector3 localPos)
 {
-	/* you can do this part yourself :) */
+	//TODO
 	return Vector3(0, 0, 0);
 }
 
@@ -138,7 +138,7 @@ void Aimbot::DoAimbot()
 
 	if (settings->aimbot.prediction)
 	{
-		/* you can do this part yourself :) */
+		
 	}
 
 	aimbot->prediction_pos = head_target;
