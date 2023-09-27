@@ -21,6 +21,34 @@ There are a variety of different weapons in Rust from Assault rifles like the AK
 
 On a base level, the goal of this program is to simply automatically adjust for each individual weapon's recoil making each weapon fire in a perfectly straight line. As you will see though this is a lot easier said than done.
 
+#Features
+
+
+**Main Features:**
+```
+-Recoil Control for all weapons
+-Variable X and Y recoil randomization
+-Support for all weapon attachnments
+-Auto Weapon Detection
+-Auto Ammo Detection
+-Fully customizable keybinds for all functions
+```
+**Misc Features:**
+```
+-Auto Smelt (Small and Large Furnaces)
+-Auto Codelock
+-Auto Upgrade
+-Anti AFK
+-Full UI Customization
+-Automatic Firing for Semi-Automatic weapons
+-5 Different Crosshair Overlays
+-Custom Firing Sounds
+```
+**Work In Progress Features:**
+```
+-External Aimbot (Detects enemy positions based on a trained nural net model)
+-Player highlighting (Places a bright box around enemies to make them easier to spot in darker enviroments)
+```
 
 # Main Challenges:
 
@@ -29,7 +57,9 @@ On a base level, the goal of this program is to simply automatically adjust for 
 **-Adjusting for randomness caused by weapon spread**
 
 **-Scailing recoil patterns based on mouse placement and screen resolution**
-`
+
+**-Adjusting recoil pattern depending on bullets in clip 
+
 
 
 
