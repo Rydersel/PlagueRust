@@ -25,7 +25,7 @@ On a base level, the goal of this program is to simply automatically adjust for 
 
 **-Scailing recoil patterns based on mouse placement and screen resolution**
 
-**-Adjusting recoil pattern depending on bullets in clip 
+**-Adjusting recoil pattern depending on bullets in clip**
 
 
 ## Features
