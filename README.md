@@ -1,3 +1,9 @@
+
+# DISCLAIMER: 
+**I am not responsible for anything done with this code. It is for educational purposes only. I do not condone cheating in video games, 
+all code has been submitted to EAC after the study concluded.**
+
+
 # PlagueRust - External Recoil Cheat for Rust
 
 Decided to make this code public because its a year old.
@@ -61,6 +67,3 @@ On a base level, the goal of this program is to simply automatically adjust for 
 
 
 
-# DISCLAIMER: 
-**I am not responsible for anything done with this code. It is for educational purposes only. I do not condone cheating in video games, 
-all code has been submitted to EAC after the study concluded.**
