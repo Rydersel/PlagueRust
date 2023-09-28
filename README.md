@@ -17,7 +17,7 @@ This code is part of a study done on Rust's Anti-Cheat. More info can be found h
 
 ## Description
 
-"Rust is a multiplayer survival video game developed by Facepunch Studios. The objective of Rust is to survive in the wilderness using gathered or stolen materials. Players must successfully manage their hunger, thirst, and health, or risk dying. Despite the presence of hostile animals such as bears and wolves, the primary threat to the player is other players due to the game being solely multiplayer." (Via Wikipedia).
+Rust is a multiplayer survival video game developed by Facepunch Studios. The objective of Rust is to survive in the wilderness using gathered or stolen materials. Players must successfully manage their hunger, thirst, and health, or risk dying. Despite the presence of hostile animals such as bears and wolves, the primary threat to the player is other players due to the game being solely multiplayer. (Via Wikipedia).
 
 There are a variety of different weapons in Rust from Assault rifles like the AK47 to small pistols like the revolver. Each of these weapons has a (mostly) fixed recoil spread which raises the overall skill ceiling of the game. Many fights in the game are decided by which player is better able to control said recoil. 
 
